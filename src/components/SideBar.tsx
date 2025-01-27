@@ -1,17 +1,5 @@
 import React, { useState } from 'react';
-import {   
-  Home,   
-  Map,   
-  FileText,   
-  Settings,   
-  Tag,   
-  User,   
-  LogOut,   
-  X,   
-  BarChart2,
-  ChevronDown,
-  ChevronRight 
-} from 'lucide-react';
+import { User, LogOut, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { paths } from '../routes/Path';
 import { useAuth } from '../contexts/Store';
@@ -24,8 +12,9 @@ interface SubMenuItem {
 
 interface MenuItem {
   title: string;
-  icon: React.ComponentType;
+  icon: string;
   path: string;
+   activeIcon?:string;
   subTitles?: SubMenuItem[];
 }
 
@@ -37,76 +26,77 @@ interface SideBarProps {
 const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
   const { logout } = useAuth();
-  const [openMenus, setOpenMenus] = useState<{[key: string]: boolean}>({});
+  const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
 
   const menuItems: MenuItem[] = [
-    { 
-      title: 'Overview', 
-      icon: Home, 
-      path: paths.overview 
+    {
+      title: 'Overview',
+      icon: '/Sidebar/Overview.png',
+      path: paths.overview,
     },
-    { 
-      title: 'Trip Log', 
-      icon: Map, 
-      path: paths.tripLog 
+    {
+      title: 'Trip Log',
+      icon: '/Sidebar/Triplog.png',
+      path: paths.tripLog,
     },
-    { 
-      title: 'Profile', 
-      icon: Settings, 
+    {
+      title: 'Profile',
+      icon: '/Sidebar/Profiles.png',
+      activeIcon:'/Sidebar/Vector.png',
       path: paths.profile,
       subTitles: [
         {
-          title: "User Profile",
-          icon: "/icons/user-profile.png",
-          path: paths.profile
+          title: 'Users Profiles',
+          icon: '/Sidebar/Users Profiles Icons.png',
+          path: paths.profile,
         },
         {
-          title: "Security",
-          icon: "/icons/security.png",
-          path: paths.profile
+          title: 'Individual User Information',
+          icon: '/Sidebar/User Info.png',
+          path: paths.profile,
         },
-      ] 
+      ],
     },
-    { 
-      title: 'Dashboard Control', 
-      icon: BarChart2, 
-      path: paths.dashboard 
+    {
+      title: 'Dashboard Control',
+      icon: '/Sidebar/Dashboard Contrpl.png',
+      path: paths.dashboard,
     },
-    { 
-      title: 'Reports', 
-      icon: FileText, 
-      path: paths.reports 
+    {
+      title: 'Reports',
+      icon: '/Sidebar/Reports.png',
+      path: paths.reports,
     },
-    { 
-      title: 'Tags', 
-      icon: Tag, 
-      path: paths.tags 
+    {
+      title: 'Tags',
+      icon: '/Sidebar/Tags.png',
+      path: paths.tags,
     },
   ];
 
   const toggleSubmenu = (title: string) => {
-    setOpenMenus(prev => ({
+    setOpenMenus((prev) => ({
       ...prev,
-      [title]: !prev[title]
+      [title]: !prev[title],
     }));
   };
 
   return (
-    <>
+    <div className='m-[1vh]'>
       {/* Overlay for mobile */}
       <div
         className={`fixed inset-0 bg-black/50 z-20 md:hidden ${isOpen ? 'block' : 'hidden'}`}
         onClick={onClose}
       />
-      
+
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 pt-[20px] left-0 z-30 w-[272px] h-screen rounded-[16px] bg-[#527088] text-white
+          fixed top-0 pt-[20px] left-0 z-30 w-[272px] h-[98vh] rounded-[16px] bg-[#527088] text-white
           flex flex-col
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
-          md:translate-x-0 md:static md:z-0 font-['Sofia']
+          md:translate-x-0 md:static md:z-0
         `}
       >
         {/* Mobile close button */}
@@ -117,35 +107,42 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
           <X size={24} />
         </button>
 
-        <div className="p-[16px] flex gap-2">
-          <img src="Sidebar/Group.png" alt="logo"/>
-          <h1 className="text-2xl font-bold">CarbonCred</h1>
+        <div className="px-[16px] pt-[50px] pb-[16px] flex gap-2">
+          <img src="Sidebar/Frame.png" alt="logo" />
         </div>
-        
+
         {/* Navigation Menu - Scrollable */}
-        <nav className="flex-1 overflow-y-auto">
+        <nav className="flex-1 overflow-y-auto ">
           <ul className="space-y-2">
             {menuItems.map((item) => {
               const isActive = location.pathname === item.path;
-              const Icon = item.icon;
-              
+
               return (
                 <li key={item.path}>
                   <div>
                     {item.subTitles ? (
-                      <div 
+                      <div
                         onClick={() => toggleSubmenu(item.title)}
                         className={`
                           flex items-center justify-between gap-3 px-4 py-3
                           transition-colors duration-200 cursor-pointer
-                          ${isActive ? 'bg-[#0E1E2B]' : 'hover:bg-[#0E1E2B]/50'}
+                          ${isActive ? 'bg-[#DAE5FF]' : 'hover:bg-[#0E1E2B]/50'} 
+                          ${isActive ? 'text-[#175AB6]' : 'hover:bg-[#0E1E2B]/50'}
                         `}
                       >
                         <div className="flex items-center gap-3">
-                          <Icon size={20} />
+                          <img
+                            src={isActive ? item?.activeIcon:item.icon}
+                            className={`w-[20px] h-[20px]`}
+                            alt="logo"
+                          />
                           <span>{item.title}</span>
                         </div>
-                        {openMenus[item.title] ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
+                        {openMenus[item.title] ? (
+                          <ChevronDown size={20} />
+                        ) : (
+                          <ChevronRight size={20} />
+                        )}
                       </div>
                     ) : (
                       <Link
@@ -156,28 +153,32 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
                           ${isActive ? 'bg-[#0E1E2B]' : 'hover:bg-[#0E1E2B]/50'}
                         `}
                       >
-                        <Icon size={20} />
+                        <img
+                          src={item.icon}
+                          className="w-[20px] h-[20px]"
+                          alt="logo"
+                        />
                         <span>{item.title}</span>
                       </Link>
                     )}
-                    
+
                     {/* Submenu */}
                     {item.subTitles && openMenus[item.title] && (
-                      <div className="pl-10 space-y-1">
+                      <div className="space-y-1 text-[#0E1E2B] bg-white px-0">
                         {item.subTitles.map((subItem) => (
                           <Link
                             key={subItem.title}
                             to={subItem.path || item.path}
                             className="
-                              flex items-center gap-3 px-4 py-2 text-sm 
-                              hover:bg-[#0E1E2B]/50
+                              flex items-center gap-1 py-2 
+                              hover:bg-[#0E1E2B]/50 px-4
                             "
                           >
                             {subItem.icon && (
-                              <img 
-                                src={subItem.icon} 
-                                alt={subItem.title} 
-                                className="w-5 h-5 mr-2" 
+                              <img
+                                src={subItem.icon}
+                                alt={subItem.title}
+                                className="w-5 h-5 mr-2"
                               />
                             )}
                             {subItem.title}
@@ -191,9 +192,9 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
             })}
           </ul>
         </nav>
-        
+
         {/* Fixed Bottom Buttons */}
-        <div className="py-4">
+        <div className="pb-2">
           <Link
             to={paths.profile}
             className="flex items-center gap-3 px-4 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
@@ -210,7 +211,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
           </button>
         </div>
       </aside>
-    </>
+    </div>
   );
 };
 

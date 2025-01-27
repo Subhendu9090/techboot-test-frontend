@@ -1,4 +1,5 @@
-import { Table } from '../../components';
+import { BarGraph, Card1, Table } from '../../components';
+import { Card1Props } from '../../components/Overview/Card1';
 
 function Overview() {
   const columns = [
@@ -58,8 +59,132 @@ function Overview() {
     },
   ];
 
+  const cardData: Card1Props[] = [
+    {
+      headerImageUrl: '/Overview/Liability.png',
+      headerTitle: 'Today Liability',
+      value: '600',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: '#273541',
+    },
+    {
+      headerImageUrl: '/Overview/Miles Saved.png',
+      headerTitle: 'Today Miles Saved',
+      value: '200',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: '#165AB6',
+    },
+    {
+      headerImageUrl: '/Overview/Total Users.png',
+      headerTitle: 'Today Users',
+      value: '200',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: '#165AB6',
+    },
+    {
+      headerImageUrl: '/Overview/Group 1335.png',
+      headerTitle: 'Today Creds Earned',
+      value: '600',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: '#527088',
+    },
+    {
+      headerImageUrl: '/Overview/Vector.png',
+      headerTitle: 'Today CO2 Avoided',
+      value: '27',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: '#273541',
+    },
+    {
+      headerImageUrl: '/Overview/No. of trips icon.png',
+      headerTitle: 'Today Trips',
+      value: '400',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: '#1A7DD3',
+    },
+  ];
+
   return (
     <div>
+      {/* 1st section */}
+      <section className="flex flex-col w-full gap-2 mb-4 xl:flex-row">
+        <div className="w-full xl:w-1/2">
+          <div className=" text-[#0E1E2B] px-4 font-semibold text-[24px]">
+            {' '}
+            Readings This Quarter{' '}
+          </div>
+          <div className="grid shadow-lg p-[16px] rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[16px] justify-items-center w-full">
+            {cardData.map((data, index) => (
+              <div key={index} className="min-w-[250px]">
+                <Card1
+                  key={index}
+                  headerImageUrl={data.headerImageUrl}
+                  headerTitle={data.headerTitle}
+                  value={data.value}
+                  footerImageUrl={data.footerImageUrl}
+                  footerData={data.footerData}
+                  footerTitle={data.footerTitle}
+                  backgroundColor={data.backgroundColor}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full xl:w-1/2">
+          <div className=" text-[#0E1E2B] px-4 font-semibold text-[24px]">
+            {' '}
+            Trips This Quarter{' '}
+          </div>
+          <div className="relative shadow-lg min-h-[485px] rounded-[16px] flex flex-col">
+            <div className="absolute top-0 right-0 w-64 p-4 bg-white shadow-md rounded-xl">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center w-full gap-[20px]">
+                  <img
+                    className="w-[40px] h-[40px] rounded-[8px] p-2 bg-blue-500 text-white"
+                    src="/Overview/No. of trips icon.png"
+                    alt="Liability Icon"
+                  />
+                  <span className="text-[16px] font-semibold text-[#0E1E2B]">
+                    Trips Insights 160
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex flex-col items-center justify-center w-full gap-2">
+                <div>+4% vs last Year</div>
+                <div className="flex gap-8">
+                  <div>Public Transit</div>
+                  <div>60</div>
+                </div>
+                <div className="flex gap-8">
+                  <div>Public Transit</div>
+                  <div>60</div>
+                </div>
+                <div className="flex gap-8">
+                  <div>Public Transit</div>
+                  <div>60</div>
+                </div>
+              </div>
+            </div>
+            <div className="flex-grow"></div>
+            <div>
+              <BarGraph />
+            </div>
+          </div>
+        </div>
+      </section>
       <Table columns={columns} data={data} />
     </div>
   );

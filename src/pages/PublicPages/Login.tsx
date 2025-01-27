@@ -6,6 +6,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from '../../utils/FireBaseConfig';
 import { useAuth } from '../../contexts/Store';
+import { Alert } from '../../utils/Alert';
 
 const Login: React.FC = () => {
   const navigate = useNavigate(); 
@@ -20,7 +21,8 @@ const Login: React.FC = () => {
     password: false,
   });
   const [loading, setLoading] = useState(false);
-
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState('');
   const inputFields = [
     {
       name: 'email',
@@ -78,35 +80,15 @@ const Login: React.FC = () => {
       navigate(paths.overview);
     } catch (error: any) {
       console.log('Login Error', error);
-      if (error.code) {
-        // Firebase error codes
-        console.log('Error Code:', error.code);
-
-        switch (error.code) {
-          case 'auth/user-not-found':
-            console.error('No user found with this email.');
-            break;
-          case 'auth/wrong-password':
-            console.error('Incorrect password.');
-            break;
-          case 'auth/invalid-email':
-            console.error('The email address is not valid.');
-            break;
-          case 'auth/user-disabled':
-            console.error('The user account has been disabled.');
-            break;
-          default:
-            console.error('An unknown error occurred:', error.message);
-        }
-      } else {
-        console.error('An unexpected error occurred:', error);
-      }
+      setAlertMessage(error.code || " Something went Wrong ");
+      setShowAlert(true);
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
     <div className="flex flex-col-reverse min-h-screen bg-white md:flex-row ">
       {/* Left Side - Login Form */}
       <div className="relative w-full md:w-2/4">
@@ -177,6 +159,15 @@ const Login: React.FC = () => {
         />
       </div>
     </div>
+    {showAlert && (
+        <Alert 
+          message={alertMessage} 
+          type="error" 
+          duration={5000}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+    </>
   );
 };
 

@@ -2,6 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Sofia:wght@400;500;600;700&display=swap');
+/* Font-Face Declaration for Poppins */
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/poppins-regular.woff2') format('woff2'),
+       url('./assets/fonts/poppins-regular.woff') format('woff');
+  font-weight: 400; /* Regular weight */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('./assets/fonts/poppins-bold.woff2') format('woff2'),
+       url('./assets/fonts/poppins-bold.woff') format('woff');
+  font-weight: 700; /* Bold weight */
+  font-style: normal;
+}
+
+/* Font-Face Declaration for Sofia Pro */
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('./assets/fonts/sofia-pro/sofia-pro-regular.woff2') format('woff2'),
+       url('./assets/fonts/sofia-pro/sofia-pro-regular.woff') format('woff');
+  font-weight: 400; /* Regular weight */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Sofia Pro';
+  src: url('./assets/fonts/sofia-pro/sofia-pro-bold.woff2') format('woff2'),
+       url('./assets/fonts/sofia-pro/sofia-pro-bold.woff') format('woff');
+  font-weight: 700; /* Bold weight */
+  font-style: normal;
+}
+
+/* Set Poppins as Default Font Globally */
+:root {
+  --font-primary: 'Poppins', sans-serif;
+  --font-secondary: 'Sofia Pro', sans-serif;
+}
+
+/* Apply Fonts */
+body {
+  font-family: var(--font-secondary);
+  /* margin: 10px; */
+}
+
+h1, h2, h3 {
+  font-family: var(--font-secondary);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

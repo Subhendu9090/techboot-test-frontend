@@ -20,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Fixed sidebar */}
-      <div className="fixed top-0 left-0 h-full">
+      <div className="fixed top-0 left-0">
         <SideBar
           isOpen={isSidebarOpen}
           onClose={() => setIsSidebarOpen(false)}
@@ -29,7 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
       <main className="flex-1 md:ml-[272px] overflow-y-auto">
         {/* Header with mobile menu button */}
-        <header className={`sticky top-0 ${isSidebarOpen ? " left-[270px]": "" } bg-white border-b md:hidden`}>
+        <header className={`sticky top-0 ${isSidebarOpen ? " hidden": "" } bg-white border-b md:hidden`}>
           <div className="p-4">
             <button
               className="p-2 rounded-lg hover:bg-gray-100"
@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </header>
 
         {/* Main content */}
-        <div className="p-4">{children}</div>
+        <div className="px-2 pt-[50px]">{children}</div>
       </main>
     </div>
   );

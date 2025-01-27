@@ -18,7 +18,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const logout = () => {
-    setAuthData({ userEmail: "", token: "" });
+    setAuthData({ userEmail: null, token: null });
     localStorage.removeItem('authToken');
     localStorage.removeItem('authUser');
   };
@@ -27,10 +27,18 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const savedToken = localStorage.getItem('authToken');
     const savedUserEmail = localStorage.getItem('authUser');
     if (savedToken && savedUserEmail) {
-      setAuthData({
-        userEmail: JSON.parse(savedUserEmail),
-        token: savedToken,
-      });
+      try {
+        const parsedToken = JSON.parse(savedToken);
+        const parsedUserEmail = JSON.parse(savedUserEmail);
+        setAuthData({
+          userEmail: parsedUserEmail,
+          token: parsedToken,
+        });
+      } catch (error) {
+        console.error('Error parsing stored auth data');
+        localStorage.removeItem('authToken');
+        localStorage.removeItem('authUser');
+      }
     }
   }, []);
 
