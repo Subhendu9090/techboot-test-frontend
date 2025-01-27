@@ -13,7 +13,7 @@ const Login: React.FC = () => {
   const {login} =useAuth()
   const [formData, setFormData] = useState({
     email: 'subhendu.jena@qwegle.com',
-    password: '123456',
+    password: '123456789',
   });
 
   const [touched, setTouched] = useState({
