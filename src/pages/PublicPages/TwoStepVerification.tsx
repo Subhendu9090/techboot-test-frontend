@@ -1,20 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { CustomButton } from '../../components';
-import {
-  confirmPasswordReset,
-  getAuth,
-  verifyPasswordResetCode,
-} from 'firebase/auth';
-import { firebaseConfig } from '../../utils/FireBaseConfig';
-import { initializeApp } from 'firebase/app';
-import { useNavigate } from 'react-router-dom';
-import { paths } from '../../routes/Path';
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
 const TwoStepVerification = () => {
-  const navigate = useNavigate();
   const [verificationCode, setVerificationCode] = useState([
     '',
     '',
@@ -24,7 +11,7 @@ const TwoStepVerification = () => {
     '',
   ]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  const [loading, setLoading] = useState(false);
+  
 
   const handleInputChange = (index: number, value: string) => {
     if (value.length <= 1) {
@@ -104,7 +91,6 @@ const TwoStepVerification = () => {
             {/* Submit Button */}
             <div className="flex justify-center w-full">
               <CustomButton
-                loading={loading}
                 label="Verify"
                 type="submit"
                 size="medium"
