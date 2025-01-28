@@ -47,7 +47,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
   };
 
   return (
-    <div className="w-full text-[16px] text-[#0E1E2B]">
+    <div className="w-full text-[16px] overflow-x-auto text-[#0E1E2B]">
       <table className="w-full border-collapse">
         <thead>
           <tr>

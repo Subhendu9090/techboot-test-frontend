@@ -5,7 +5,6 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-  Legend
 } from 'recharts';
 
 const data = [
@@ -31,14 +30,14 @@ const data = [
 
 const BarGraph = () => {
   return (
-    <div className="w-full p-4 h-[350px] ">
+    <div className="w-full h-[250px] ">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           data={data}
           margin={{
             top: 100,
             right: 30,
-            left: 0,
+            left: -20,
             bottom: 0,
           }}
           barGap={5}
@@ -66,22 +65,11 @@ const BarGraph = () => {
               borderRadius: '8px',
             }}
           />
-            <Legend
-            layout="vertical"
-            verticalAlign="top"
-            align="center"
-            wrapperStyle={{
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              marginBottom: '10px',
-            }}
-          />
-
+          
           {/* Bars */}
           <Bar dataKey="PublicTransit" fill="#1C90E3" radius={[8, 8, 8, 8]} barSize={30} />
-          <Bar dataKey="RideShare" fill="#527088" radius={[8, 8, 8, 8]} barSize={30} />
-          <Bar dataKey="ZeroEmission" fill="#508B46" radius={[8, 8, 8, 8]} barSize={30} />
+          <Bar dataKey="ZeroEmission" fill="#527088" radius={[8, 8, 8, 8]} barSize={30} />
+          <Bar dataKey="RideShare" fill="#508B46" radius={[8, 8, 8, 8]} barSize={30} />
         </BarChart>
       </ResponsiveContainer>
     </div>

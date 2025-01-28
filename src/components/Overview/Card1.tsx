@@ -21,7 +21,7 @@ const Card1: React.FC<Card1Props> = ({
 }) => {
   return (
     <div>
-      <div className="border flex flex-col justify-between items-center border-[#165AB6] max-w-[300px] h-[140px] rounded-[16px] p-4 bg-white shadow-md">
+      <div className="border flex flex-col justify-between items-center border-[#165AB6] max-w-[300px] max-h-[140px] rounded-[16px] p-4 bg-white shadow-md">
         {/* Header Section */}
         <div className="flex items-center w-full gap-[20px]">
           <img

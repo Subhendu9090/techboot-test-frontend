@@ -1,5 +1,6 @@
-import { BarGraph, Card1, Table } from '../../components';
+import { BarGraph, Card1, Card2, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
+import { formatDateToDDMMYYYY } from '../../utils/util';
 
 function Overview() {
   const columns = [
@@ -36,7 +37,7 @@ function Overview() {
       header: 'Details',
       size: 50,
       accessor: 'details',
-      render: (Details: any) => <div>{<Details />}</div>,
+      render: (url: any) => <div>{<img className=' hover:cursor-pointer w-[30px] h-[40px] ' src={url} alt='icon' />}</div>,
     },
   ];
 
@@ -55,7 +56,7 @@ function Overview() {
       credsEarned: 50,
       credsRedeemed: 20,
       liability: '$30',
-      details: 'NotebookTabs',
+      details: 'Overview/Row Details Icon.png',
     },
   ];
 
@@ -115,10 +116,14 @@ function Overview() {
       backgroundColor: '#1A7DD3',
     },
   ];
-
+  const date = new Date()
   return (
     <div>
       {/* 1st section */}
+      <section className="flex items-center justify-center w-full p-2">
+          <p className=' text-[#130940] text-[32px] font-semibold'>{formatDateToDDMMYYYY(date)}</p>
+      </section>
+
       <section className="flex flex-col w-full gap-2 mb-4 xl:flex-row">
         <div className="w-full xl:w-1/2">
           <div className=" text-[#0E1E2B] px-4 font-semibold text-[24px]">
@@ -126,20 +131,28 @@ function Overview() {
             Readings This Quarter{' '}
           </div>
           <div className="grid shadow-lg p-[16px] rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[16px] justify-items-center w-full">
-            {cardData.map((data, index) => (
-              <div key={index} className="min-w-[250px]">
-                <Card1
-                  key={index}
-                  headerImageUrl={data.headerImageUrl}
-                  headerTitle={data.headerTitle}
-                  value={data.value}
-                  footerImageUrl={data.footerImageUrl}
-                  footerData={data.footerData}
-                  footerTitle={data.footerTitle}
-                  backgroundColor={data.backgroundColor}
-                />
-              </div>
-            ))}
+            {cardData.map((data, index) => {
+              if (index==3) {
+                return(
+                 <div key={index} className="min-w-[240px]">
+                   <Card2/>
+                 </div>
+                )
+              }else{
+                return(<div key={index} className="min-w-[240px]">
+                  <Card1
+                    key={index}
+                    headerImageUrl={data.headerImageUrl}
+                    headerTitle={data.headerTitle}
+                    value={data.value}
+                    footerImageUrl={data.footerImageUrl}
+                    footerData={data.footerData}
+                    footerTitle={data.footerTitle}
+                    backgroundColor={data.backgroundColor}
+                  />
+                </div>)
+              }
+})}
           </div>
         </div>
         <div className="w-full xl:w-1/2">
@@ -147,9 +160,9 @@ function Overview() {
             {' '}
             Trips This Quarter{' '}
           </div>
-          <div className="relative shadow-lg min-h-[485px] rounded-[16px] flex flex-col">
-            <div className="absolute top-0 right-0 w-64 p-4 bg-white shadow-md rounded-xl">
-              <div className="flex items-center gap-3 mb-4">
+          <div className="relative shadow-lg min-h-[485px] p-[16px] rounded-[16px] flex flex-col">
+            <div className="absolute px-4 py-3 bg-white shadow-md top-3 right-3 rounded-xl">
+              <div className="flex items-center gap-3 mb-2">
                 <div className="flex items-center w-full gap-[20px]">
                   <img
                     className="w-[40px] h-[40px] rounded-[8px] p-2 bg-blue-500 text-white"
@@ -162,19 +175,41 @@ function Overview() {
                 </div>
               </div>
 
-              <div className="flex flex-col items-center justify-center w-full gap-2">
-                <div>+4% vs last Year</div>
-                <div className="flex gap-8">
-                  <div>Public Transit</div>
-                  <div>60</div>
+              <div className="flex flex-col items-center justify-center w-full">
+                <div className="pb-2 space-y-2">
+                  <div className="flex items-center justify-center gap-1 text-sm font-light text-gray-500">
+                    <img src="/Overview/Path 1008.png" alt="Trend Icon" />
+                    <span className="text-[#67AC5B] font-medium">+4%</span>
+                    <span>vs last Year</span>
+                  </div>
+                  <div className="flex justify-between gap-8">
+                    <div>Public Transit</div>
+                    <div className=" text-[#165AB6]">80</div>
+                  </div>
+                  <div className="flex justify-between gap-8">
+                    <div>Zero Emission</div>
+                    <div className=" text-[#0E1E2B]">20</div>
+                  </div>
+                  <div className="flex justify-between gap-8">
+                    <div>Ride Share</div>
+                    <div className=" text-[#2F5C28]">60</div>
+                  </div>
                 </div>
-                <div className="flex gap-8">
-                  <div>Public Transit</div>
-                  <div>60</div>
+              </div>
+            </div>
+            <div className="flex w-full sm:justify-center pt-[70px] pr-[120px] ">
+              <div className="flex flex-col gap-2 min-w-fit max-w-[150px] ">
+                <div className="flex items-center gap-4 ">
+                  <div className=" rounded-2xl w-2 h-4 bg-[#0E1E2B]"></div>
+                  <div>Zero Emission</div>
                 </div>
-                <div className="flex gap-8">
+                <div className="flex items-center gap-4 ">
+                  <div className="rounded-2xl w-2 h-4 bg-[#165AB6]"></div>
                   <div>Public Transit</div>
-                  <div>60</div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="rounded-2xl w-2 h-4 bg-[#2F5C28]"></div>
+                  <div>Ride Share</div>
                 </div>
               </div>
             </div>
@@ -185,7 +220,9 @@ function Overview() {
           </div>
         </div>
       </section>
-      <Table columns={columns} data={data} />
+      <section>
+        <Table columns={columns} data={data} />
+      </section>
     </div>
   );
 }

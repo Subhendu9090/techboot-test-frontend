@@ -41,7 +41,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         </header>
 
         {/* Main content */}
-        <div className="px-2 pt-[50px]">{children}</div>
+        <div className="px-4 pt-[20px]">{children}</div>
       </main>
     </div>
   );
