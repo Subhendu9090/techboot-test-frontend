@@ -89,7 +89,7 @@ const TripLog = () => {
           <div className="flex items-center gap-2 py-1 px-4 border hover:cursor-pointer border-[#707070] bg-white rounded-xl text-[#707070] shadow-2xl">
             Export
           </div>
-          <select className=' bg-[#C1CAE3] px-2 rounded-xl outline-none'>
+          <select className=' bg-[#C1CAE3] px-4 rounded-xl outline-none'>
             <option value="">Sort By</option>
             <option value="">Opt 1</option>
             <option value="">Opt 2</option>

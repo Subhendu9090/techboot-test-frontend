@@ -47,7 +47,7 @@ console.log("Data from forgot password",userEmail,token,isAuthenticated);
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-white md:flex-row">
+    <div className="flex flex-col-reverse min-h-screen bg-white md:flex-row">
       {/* Right Side - Form */}
       <div className="flex items-center justify-center w-full px-4 py-8 md:w-2/4 md:px-8">
         <div className="w-full max-w-md transition-all duration-300 hover:scale-[1.02]">
