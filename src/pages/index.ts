@@ -4,7 +4,7 @@ import ErrorFallback from './PublicPages/ErrorFallback';
 import Overview from './PrivatePages/Overview';
 import TwoStepVerification from './PublicPages/TwoStepVerification';
 import Dashboard from './PrivatePages/Dashboard';
-
+import TripLog from './PrivatePages/TripLog';
 export {
   Login,
   ForgotPassword,
@@ -12,4 +12,5 @@ export {
   Overview,
   TwoStepVerification,
   Dashboard,
+  TripLog
 };

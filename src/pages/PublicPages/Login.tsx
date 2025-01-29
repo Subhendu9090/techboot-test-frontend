@@ -151,9 +151,9 @@ const Login: React.FC = () => {
       </div>
 
       {/* Right Side - Image */}
-      <div className="relative w-full h-[300px] md:h-screen md:w-2/4">
+      <div className="relative w-full min-h-[300px] md:h-screen md:w-2/4">
         <img
-          src="LoginPage/The Road Less Travelled Motivational Instagram Post  1.png"
+          src="LoginPage/Bike.jpg"
           alt="Background"
           className="object-cover w-full h-full"
         />

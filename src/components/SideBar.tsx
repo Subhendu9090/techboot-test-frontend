@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, LogOut, X, ChevronDown, ChevronRight } from 'lucide-react';
+import { X, ChevronDown, ChevronRight } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { paths } from '../routes/Path';
 import { useAuth } from '../contexts/Store';
@@ -14,7 +14,7 @@ interface MenuItem {
   title: string;
   icon: string;
   path: string;
-   activeIcon?:string;
+  activeIcon?: string;
   subTitles?: SubMenuItem[];
 }
 
@@ -31,18 +31,18 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
   const menuItems: MenuItem[] = [
     {
       title: 'Overview',
-      icon: '/Sidebar/Overview.png',
+      icon: '/Sidebar/Overview.svg',
       path: paths.overview,
     },
     {
       title: 'Trip Log',
-      icon: '/Sidebar/Triplog.png',
+      icon: '/Sidebar/Triplog.svg',
       path: paths.tripLog,
     },
     {
       title: 'Profile',
-      icon: '/Sidebar/Profiles.png',
-      activeIcon:'/Sidebar/Vector.png',
+      icon: '/Sidebar/Profile.svg',
+      activeIcon: '/Sidebar/ProfileActive.svg',
       path: paths.profile,
       subTitles: [
         {
@@ -59,17 +59,17 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
     },
     {
       title: 'Dashboard Control',
-      icon: '/Sidebar/Dashboard Contrpl.png',
+      icon: '/Sidebar/Dashboard Contrpl.svg',
       path: paths.dashboard,
     },
     {
       title: 'Reports',
-      icon: '/Sidebar/Reports.png',
+      icon: '/Sidebar/Reports.svg',
       path: paths.reports,
     },
     {
       title: 'Tags',
-      icon: '/Sidebar/Tags.png',
+      icon: '/Sidebar/Tags.svg',
       path: paths.tags,
     },
   ];
@@ -82,7 +82,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className='m-[1vh]'>
+    <div className="m-[1vh]">
       {/* Overlay for mobile */}
       <div
         className={`fixed inset-0 bg-black/50 z-20 md:hidden ${isOpen ? 'block' : 'hidden'}`}
@@ -132,7 +132,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
                       >
                         <div className="flex items-center gap-3">
                           <img
-                            src={isActive ? item?.activeIcon:item.icon}
+                            src={isActive ? item?.activeIcon : item.icon}
                             className={`w-[20px] h-[20px]`}
                             alt="logo"
                           />
@@ -199,14 +199,14 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
             to={paths.profile}
             className="flex items-center gap-3 px-4 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
           >
-            <User size={20} />
+            <img src="/Sidebar/Profiles.svg" className="w-[20px] h-[20px]" alt="logo" />
             <span>Profile</span>
           </Link>
           <button
             className="flex items-center px-4 gap-3 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
             onClick={() => logout()}
           >
-            <LogOut size={20} />
+            <img src="/Sidebar/Log Out.svg" className="w-[20px] h-[20px]" alt="logo" />
             <span>Logout</span>
           </button>
         </div>

@@ -3,10 +3,10 @@ import { Mail, Lock, Search, User, AlertCircle } from 'lucide-react';
 
 interface CustomInputProps {
   name: string;
-  label: string;
+  label?: string;
   placeholder?: string;
   type?: string;
-  value: string;
+  value: string | null | undefined;
   errorText?: string;
   helperText?: string;
   required?: boolean;
@@ -19,7 +19,7 @@ interface CustomInputProps {
 const CustomInput: React.FC<CustomInputProps> = ({
   name,
   label,
-  placeholder = ' ',
+  placeholder = '',
   type = 'text',
   value,
   errorText,
@@ -107,7 +107,7 @@ const CustomInput: React.FC<CustomInputProps> = ({
           id={name}
           name={name}
           type={type}
-          value={value}
+          value={value ?? ""}
           placeholder={placeholder}
           onChange={onChange}
           onBlur={onBlur}

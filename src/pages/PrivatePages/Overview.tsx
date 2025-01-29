@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { BarGraph, Card1, Card2, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
+import { Search } from 'lucide-react';
 
 function Overview() {
   const columns = [
@@ -37,7 +39,17 @@ function Overview() {
       header: 'Details',
       size: 50,
       accessor: 'details',
-      render: (url: any) => <div>{<img className=' hover:cursor-pointer w-[30px] h-[40px] ' src={url} alt='icon' />}</div>,
+      render: (url: any) => (
+        <div>
+          {
+            <img
+              className=" hover:cursor-pointer w-[30px] h-[40px] "
+              src={url}
+              alt="icon"
+            />
+          }
+        </div>
+      ),
     },
   ];
 
@@ -116,12 +128,19 @@ function Overview() {
       backgroundColor: '#1A7DD3',
     },
   ];
-  const date = new Date()
+  const date = new Date();
+  const [search, setSearch] = useState<null | string>();
+  const handelSearch = (e: any) => {
+    setSearch(e.target.value);
+  };
+  console.log(search);
   return (
-    <div>
+    <div className="flex flex-col gap-4 ">
       {/* 1st section */}
       <section className="flex items-center justify-center w-full p-2">
-          <p className=' text-[#130940] text-[32px] font-semibold'>{formatDateToDDMMYYYY(date)}</p>
+        <p className=" text-[#130940] text-[32px] font-semibold">
+          {formatDateToDDMMYYYY(date)}
+        </p>
       </section>
 
       <section className="flex flex-col w-full gap-2 mb-4 xl:flex-row">
@@ -132,27 +151,29 @@ function Overview() {
           </div>
           <div className="grid shadow-lg p-[16px] rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[16px] justify-items-center w-full">
             {cardData.map((data, index) => {
-              if (index==3) {
-                return(
-                 <div key={index} className="min-w-[240px]">
-                   <Card2/>
-                 </div>
-                )
-              }else{
-                return(<div key={index} className="min-w-[240px]">
-                  <Card1
-                    key={index}
-                    headerImageUrl={data.headerImageUrl}
-                    headerTitle={data.headerTitle}
-                    value={data.value}
-                    footerImageUrl={data.footerImageUrl}
-                    footerData={data.footerData}
-                    footerTitle={data.footerTitle}
-                    backgroundColor={data.backgroundColor}
-                  />
-                </div>)
+              if (index == 3) {
+                return (
+                  <div key={index} className="min-w-[240px]">
+                    <Card2 />
+                  </div>
+                );
+              } else {
+                return (
+                  <div key={index} className="min-w-[240px]">
+                    <Card1
+                      key={index}
+                      headerImageUrl={data.headerImageUrl}
+                      headerTitle={data.headerTitle}
+                      value={data.value}
+                      footerImageUrl={data.footerImageUrl}
+                      footerData={data.footerData}
+                      footerTitle={data.footerTitle}
+                      backgroundColor={data.backgroundColor}
+                    />
+                  </div>
+                );
               }
-})}
+            })}
           </div>
         </div>
         <div className="w-full xl:w-1/2">
@@ -221,6 +242,32 @@ function Overview() {
         </div>
       </section>
       <section>
+        <div className="flex flex-wrap items-center justify-between w-full p-2 min-w-fit">
+          <div className=" text-[#130940] text-[24px] font-semibold">
+            Recent User Status
+          </div>
+          <div className="flex gap-3 ">
+            <div className="flex items-center gap-2 py-2 px-4 border hover:cursor-pointer border-[#165AB6] bg-white rounded-xl text-[#165AB6]">
+              <img className='' src="Overview/Export.svg" alt="icon" />
+              <div>Export</div>
+            </div>
+            <div className="flex hover:cursor-pointer items-center gap-2 p-2 text-white rounded-xl bg-[#165AB6]">
+              <img src="Overview/Filter & Sort Icon.svg" alt="icon" />
+              <div>Filter & Sort</div>
+            </div>
+            <div className="border-[#165AB6] hover:cursor-pointer items-center flex gap-2 px-4 border-[2px] rounded-2xl">
+              <input
+                className="bg-transparent border-none outline-none "
+                name="search"
+                type="text"
+                placeholder="Search Hear "
+                value={search ?? ''}
+                onChange={handelSearch}
+              ></input>
+              <Search className='text-blue-700 '/>
+            </div>
+          </div>
+        </div>
         <Table columns={columns} data={data} />
       </section>
     </div>
