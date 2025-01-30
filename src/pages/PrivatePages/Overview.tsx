@@ -182,9 +182,9 @@ function Overview() {
             Trips This Quarter{' '}
           </div>
           <div className="relative shadow-lg min-h-[485px] p-[16px] rounded-[16px] flex flex-col">
-            <div className="absolute px-4 py-3 bg-white shadow-md top-3 right-3 rounded-xl">
+            <div className="px-4 py-3 bg-white shadow-md sm:absolute top-3 right-3 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
-                <div className="flex items-center w-full gap-[20px]">
+                <div className="flex items-center justify-evenly w-full gap-[20px]">
                   <img
                     className="w-[40px] h-[40px] rounded-[8px] p-2 bg-blue-500 text-white"
                     src="/Overview/No. of trips icon.png"
@@ -193,6 +193,7 @@ function Overview() {
                   <span className="text-[16px] font-semibold text-[#0E1E2B]">
                     Trips Insights 160
                   </span>
+                  <div></div>
                 </div>
               </div>
 
@@ -241,6 +242,7 @@ function Overview() {
           </div>
         </div>
       </section>
+      
       <section>
         <div className="flex flex-wrap items-center justify-between w-full p-2 min-w-fit">
           <div className=" text-[#130940] text-[24px] font-semibold">
