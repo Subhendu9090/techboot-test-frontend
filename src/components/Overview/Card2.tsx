@@ -3,7 +3,7 @@ import React from 'react';
 const Card2: React.FC = () => {
   return (
     <div className="border flex flex-col justify-between items-center border-[#527088] max-w-[300px] max-h-[140px] rounded-[16px] p-4 bg-white shadow-md">
-      <div className="flex items-center w-full gap-[20px]">
+      <div className="flex items-center justify-between w-full">
         <img
           className={`w-[40px] bg-[#527088] h-[40px] rounded-[8px] p-2 text-white`}
           src="/Overview/Group 1335.png"
