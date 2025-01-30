@@ -47,13 +47,13 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       subTitles: [
         {
           title: 'Users Profiles',
-          icon: '/Sidebar/Users Profiles Icons.png',
+          icon: '/Sidebar/Users Profiles Icons.svg',
           path: paths.profile,
         },
         {
           title: 'Individual User Information',
-          icon: '/Sidebar/User Info.png',
-          path: paths.profile,
+          icon: '/Sidebar/User Info.svg',
+          path: paths.individualUserInfo,
         },
       ],
     },
@@ -92,7 +92,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 pt-[20px] left-0 z-30 w-[272px] h-[98vh] rounded-[16px] bg-[#527088] text-white
+          fixed top-0 left-0 z-30 w-[272px] h-[98vh] rounded-[16px] bg-[#527088] text-white
           flex flex-col
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? 'translate-x-0' : '-translate-x-full'}
@@ -108,7 +108,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
         </button>
 
         <div className="px-[16px] pt-[50px] pb-[16px] flex gap-2">
-          <img src="Sidebar/Frame.png" alt="logo" />
+          <img src="Sidebar/Frame.svg" alt="logo" />
         </div>
 
         {/* Navigation Menu - Scrollable */}
@@ -125,7 +125,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
                         onClick={() => toggleSubmenu(item.title)}
                         className={`
                           flex items-center justify-between gap-3 px-4 py-3
-                          transition-colors duration-200 cursor-pointer
+                          transition-colors duration-400 cursor-pointer
                           ${isActive ? 'bg-[#DAE5FF]' : 'hover:bg-[#0E1E2B]/50'} 
                           ${isActive ? 'text-[#175AB6]' : 'hover:bg-[#0E1E2B]/50'}
                         `}
@@ -164,14 +164,14 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
 
                     {/* Submenu */}
                     {item.subTitles && openMenus[item.title] && (
-                      <div className="space-y-1 text-[#0E1E2B] bg-white px-0">
+                      <div className="space-y-2 text-[#0E1E2B] bg-white ">
                         {item.subTitles.map((subItem) => (
                           <Link
                             key={subItem.title}
                             to={subItem.path || item.path}
                             className="
-                              flex items-center gap-1 py-2 
-                              hover:bg-[#0E1E2B]/50 px-4
+                              flex duration-200 items-center pl-8 gap-1 py-2 
+                              hover:bg-[#0E1E2B]/50 
                             "
                           >
                             {subItem.icon && (
@@ -199,14 +199,22 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
             to={paths.profile}
             className="flex items-center gap-3 px-4 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
           >
-            <img src="/Sidebar/Profiles.svg" className="w-[20px] h-[20px]" alt="logo" />
+            <img
+              src="/Sidebar/Profiles.svg"
+              className="w-[20px] h-[20px]"
+              alt="logo"
+            />
             <span>Profile</span>
           </Link>
           <button
             className="flex items-center px-4 gap-3 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
             onClick={() => logout()}
           >
-            <img src="/Sidebar/Log Out.svg" className="w-[20px] h-[20px]" alt="logo" />
+            <img
+              src="/Sidebar/Log Out.svg"
+              className="w-[20px] h-[20px]"
+              alt="logo"
+            />
             <span>Logout</span>
           </button>
         </div>

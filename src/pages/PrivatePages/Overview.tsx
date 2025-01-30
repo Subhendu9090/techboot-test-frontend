@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BarGraph, Card1, Card2, Table } from '../../components';
+import { BarGraph, Card1, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
 import { Search } from 'lucide-react';
@@ -74,60 +74,61 @@ function Overview() {
 
   const cardData: Card1Props[] = [
     {
-      headerImageUrl: '/Overview/Liability.png',
-      headerTitle: 'Today Liability',
-      value: '600',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: '#273541',
-    },
-    {
-      headerImageUrl: '/Overview/Miles Saved.png',
-      headerTitle: 'Today Miles Saved',
+      headerImageUrl: '/Overview/No. of trips icon.svg',
+      headerTitle: 'Trips',
       value: '200',
       footerImageUrl: '/Overview/Path 1008.png',
       footerData: '+4%',
       footerTitle: 'vs last quarter',
-      backgroundColor: '#165AB6',
+      backgroundColor: '#EFF4FF',
     },
     {
-      headerImageUrl: '/Overview/Total Users.png',
-      headerTitle: 'Today Users',
+      headerImageUrl: '/Overview/Total Users.svg',
+      headerTitle: 'Users',
       value: '200',
       footerImageUrl: '/Overview/Path 1008.png',
       footerData: '+4%',
       footerTitle: 'vs last quarter',
-      backgroundColor: '#165AB6',
+      backgroundColor: '#E0F9DD',
     },
     {
-      headerImageUrl: '/Overview/Group 1335.png',
-      headerTitle: 'Today Creds Earned',
+      headerImageUrl: '/Overview/Total Creds Icon.svg',
+      headerTitle: ' Creds Earned',
+      value: '200',
+      footerImageUrl: '/Overview/Path 1008.png',
+      footerData: '+4%',
+      footerTitle: 'vs last quarter',
+      backgroundColor: 'rgb(132 154 173)',
+    },
+    {
+      headerImageUrl: '/Overview/Vector.svg',
+      headerTitle: ' CO2 Avoided',
       value: '600',
       footerImageUrl: '/Overview/Path 1008.png',
       footerData: '+4%',
       footerTitle: 'vs last quarter',
-      backgroundColor: '#527088',
+      backgroundColor: '#E0F9DD',
     },
     {
-      headerImageUrl: '/Overview/Vector.png',
-      headerTitle: 'Today CO2 Avoided',
+      headerImageUrl: '/Overview/points-and-dollars-exchange-svgrepo-com 2.svg',
+      headerTitle: 'Creds Redeemed',
       value: '27',
       footerImageUrl: '/Overview/Path 1008.png',
       footerData: '+4%',
       footerTitle: 'vs last quarter',
-      backgroundColor: '#273541',
+      backgroundColor: 'rgb(129 172 231)',
     },
     {
-      headerImageUrl: '/Overview/No. of trips icon.png',
-      headerTitle: 'Today Trips',
+      headerImageUrl: '/Overview/Miles Saved.svg',
+      headerTitle: 'Miles Saved',
       value: '400',
       footerImageUrl: '/Overview/Path 1008.png',
       footerData: '+4%',
       footerTitle: 'vs last quarter',
-      backgroundColor: '#1A7DD3',
+      backgroundColor: '#EDD15A',
     },
   ];
+  
   const date = new Date();
   const [search, setSearch] = useState<null | string>();
   const handelSearch = (e: any) => {
@@ -135,9 +136,9 @@ function Overview() {
   };
   console.log(search);
   return (
-    <div className="flex flex-col gap-4 ">
+    <div className="flex flex-col gap-8 ">
       {/* 1st section */}
-      <section className="flex items-center justify-center w-full p-2">
+      <section className="flex items-center justify-center w-full ">
         <p className=" text-[#130940] text-[32px] font-semibold">
           {formatDateToDDMMYYYY(date)}
         </p>
@@ -145,19 +146,12 @@ function Overview() {
 
       <section className="flex flex-col w-full gap-2 mb-4 xl:flex-row">
         <div className="w-full xl:w-1/2">
-          <div className=" text-[#0E1E2B] px-4 font-semibold text-[24px]">
+          <div className=" text-center text-[#0E1E2B] px-4 font-semibold text-[24px]">
             {' '}
-            Readings This Quarter{' '}
+            Readings
           </div>
-          <div className="grid shadow-lg p-[16px] rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[16px] justify-items-center w-full">
+          <div className="grid shadow-lg p-[16px] bg-white rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[18px] justify-items-center w-full">
             {cardData.map((data, index) => {
-              if (index == 3) {
-                return (
-                  <div key={index} className="min-w-[240px]">
-                    <Card2 />
-                  </div>
-                );
-              } else {
                 return (
                   <div key={index} className="min-w-[240px]">
                     <Card1
@@ -172,28 +166,27 @@ function Overview() {
                     />
                   </div>
                 );
-              }
             })}
           </div>
         </div>
         <div className="w-full xl:w-1/2">
-          <div className=" text-[#0E1E2B] px-4 font-semibold text-[24px]">
+          <div className=" text-center text-[#0E1E2B] px-4 font-semibold text-[24px]">
             {' '}
-            Trips This Quarter{' '}
+            Trips 
           </div>
-          <div className="relative shadow-lg min-h-[485px] p-[16px] rounded-[16px] flex flex-col">
-            <div className="px-4 py-3 bg-white shadow-md sm:absolute top-3 right-3 rounded-xl">
+          <div className="relative bg-white shadow-lg min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
+            <div className="px-4 py-3 shadow-md sm:absolute top-3 right-3 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex items-center justify-evenly w-full gap-[20px]">
                   <img
-                    className="w-[40px] h-[40px] rounded-[8px] p-2 bg-blue-500 text-white"
-                    src="/Overview/No. of trips icon.png"
+                    className="w-[40px] h-[40px] rounded-[8px]"
+                    src="/Overview/Frame 1000006660.svg"
                     alt="Liability Icon"
                   />
                   <span className="text-[16px] font-semibold text-[#0E1E2B]">
-                    Trips Insights 160
+                    Trips Insights 
                   </span>
-                  <div></div>
+                  <div className='text-[#67AC5B]'>160</div>
                 </div>
               </div>
 
@@ -235,7 +228,7 @@ function Overview() {
                 </div>
               </div>
             </div>
-            <div className="flex-grow"></div>
+            {/* <div className="flex-grow"></div> */}
             <div>
               <BarGraph />
             </div>

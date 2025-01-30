@@ -89,13 +89,13 @@ const Login: React.FC = () => {
 
   return (
     <>
-    <div className="flex flex-col-reverse min-h-screen bg-white md:flex-row ">
+    <div className="flex flex-col-reverse items-center justify-center min-h-screen bg-white md:flex-row ">
       {/* Left Side - Login Form */}
       <div className="relative w-full md:w-2/4">
         <div className="w-full px-4 py-8 md:px-8">
           <form
             onSubmit={handleSubmit}
-            className="max-w-md p-6 mx-auto bg-white md:py-16 rounded-xl"
+            className="max-w-md  p-6 mx-auto bg-[#F1F1F1] md:py-16 rounded-xl"
           >
             <h2 className="mb-6 text-2xl font-bold text-gray-800">
               Get Started
@@ -127,25 +127,13 @@ const Login: React.FC = () => {
             </div>
 
             {/* Submit Button */}
-            <div className="flex justify-center w-full">
               <CustomButton
+              fullWidth={true}
                 loading={loading}
                 label="Login"
                 type="submit"
                 size="medium"
               />
-            </div>
-
-            {/* Register Link */}
-            <p className="mt-6 text-sm text-center text-gray-600">
-              Don't have an account?{' '}
-              <Link
-                to="/register"
-                className="font-semibold text-blue-600 hover:text-blue-700 hover:underline"
-              >
-                Register Now
-              </Link>
-            </p>
           </form>
         </div>
       </div>
@@ -153,7 +141,7 @@ const Login: React.FC = () => {
       {/* Right Side - Image */}
       <div className="relative w-full min-h-[300px] md:h-screen md:w-2/4">
         <img
-          src="LoginPage/Bike.jpg"
+          src="LoginPage/Bike.svg"
           alt="Background"
           className="object-cover w-full h-full"
         />

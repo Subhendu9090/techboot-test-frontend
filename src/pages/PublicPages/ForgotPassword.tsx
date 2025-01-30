@@ -119,7 +119,7 @@ console.log("Data from forgot password",userEmail,token,isAuthenticated);
 
       <div className="relative w-full h-[300px] md:h-screen md:w-2/4">
         <img
-          src="LoginPage/The Road Less Travelled Motivational Instagram Post  1.png"
+          src="LoginPage/Bike.svg"
           alt="Background"
           className="object-cover w-full h-full"
         />

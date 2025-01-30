@@ -17,20 +17,26 @@ const Card1: React.FC<Card1Props> = ({
   footerImageUrl = '/Overview/Path 1008.png',
   footerData = '+4%',
   footerTitle = 'vs last quarter',
-  backgroundColor="#273541"
+  backgroundColor="#6695d6"
 }) => {
+
+  const gradientStyle = {
+    background: `linear-gradient(to right, #FFFFFF, ${backgroundColor})`
+  };
+
   return (
     <div>
-      <div className="border flex flex-col justify-between items-center border-[#165AB6] max-w-[300px] max-h-[140px] rounded-[16px] p-4 bg-white shadow-md">
+      <div className="flex flex-col justify-between items-center max-w-[300px] max-h-[140px] rounded-[16px] p-4 bg-white shadow-md"
+      style={gradientStyle}
+      >
         {/* Header Section */}
-        <div className="flex items-center w-full gap-[20px]">
+        <div className="relative w-full">
           <img
-            className={`w-[40px] h-[40px] rounded-[8px] p-2 text-white`}
+            className={`w-[30px] h-[30px] rounded-[8px] absolute text-white`}
             src={headerImageUrl}
             alt="Liability Icon"
-            style={{backgroundColor: backgroundColor}}
           />
-          <span className="text-[16px] font-semibold text-[#0E1E2B]">
+          <span className="text-[16px] py-1 font-semibold text-center text-[#0E1E2B]">
             {headerTitle}
           </span>
         </div>

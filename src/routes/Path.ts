@@ -8,6 +8,7 @@ interface paths {
   tags: string;
   reports: string;
   profile:string;
+  individualUserInfo:string;
 }
 
 export const paths: paths = {
@@ -20,4 +21,5 @@ export const paths: paths = {
   tags: '/tags',
   reports: '/reports',
   profile: "/profile",
+  individualUserInfo:"/individual-user-info"
 };
