@@ -8,8 +8,9 @@ const TripLog = () => {
       accessor: 'status',
       size: 80,
       render: (status: string) => (
-        <div className={` ${status=="Active" ? "bg-[#DBF2E5] border-[#6CEAC0]":"bg-[#FDEAEC] border-[#FE696A]"} w-[30px] h-[30px] border  rounded-md`}>
-        </div>
+        <div
+          className={` ${status == 'Active' ? 'bg-[#DBF2E5] border-[#6CEAC0]' : 'bg-[#FDEAEC] border-[#FE696A]'} w-[30px] h-[30px] border  rounded-md`}
+        ></div>
       ),
     },
     {
@@ -67,10 +68,10 @@ const TripLog = () => {
       details: 'Overview/Row Details Icon.png',
     },
   ];
-  
+
   return (
     <div className="flex flex-col gap-4 ">
-      <div className='flex flex-wrap justify-between gap-4'>
+      <div className="flex flex-wrap justify-between gap-4">
         <div className="flex flex-wrap items-center gap-2 ">
           <div className=" text-[#707070] font-bold text-[24px] ">
             {' '}
@@ -85,25 +86,25 @@ const TripLog = () => {
             <input className="px-2 w-[100px] rounded-full border outline-none border-[#707070]"></input>
           </div>
         </div>
-        <div className='flex gap-2 '>
+        <div className="flex flex-wrap gap-2 ">
           <div className="flex items-center gap-2 py-1 px-4 border hover:cursor-pointer border-[#707070] bg-white rounded-xl text-[#707070] shadow-2xl">
             Export
           </div>
-          <select className=' bg-[#C1CAE3] px-4 rounded-xl outline-none'>
+          <select className=" bg-[#C1CAE3] px-4 rounded-xl outline-none">
             <option value="">Sort By</option>
             <option value="">Opt 1</option>
             <option value="">Opt 2</option>
           </select>
           <div className="border-[#707070] hover:cursor-pointer items-center flex gap-2 px-4 border-[2px] rounded-2xl">
-              <input
-                className="w-32 bg-transparent border-none outline-none "
-                name="search"
-                type="text"
-                placeholder="Search Hear "
-                value={''}
-              ></input>
-              <Search className=' text-[#707070]'/>
-            </div>
+            <input
+              className="w-32 bg-transparent border-none outline-none "
+              name="search"
+              type="text"
+              placeholder="Search Hear "
+              value={''}
+            ></input>
+            <Search className=" text-[#707070]" />
+          </div>
         </div>
       </div>
       <Table columns={columns} data={data} />

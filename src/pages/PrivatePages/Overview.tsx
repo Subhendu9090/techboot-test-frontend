@@ -246,7 +246,7 @@ function Overview() {
           <div className=" text-[#130940] text-[24px] font-semibold">
             Recent User Status
           </div>
-          <div className="flex gap-3 ">
+          <div className="flex flex-wrap gap-3 ">
             <div className="flex items-center gap-2 py-2 px-4 border hover:cursor-pointer border-[#165AB6] bg-white rounded-xl text-[#165AB6]">
               <img className='' src="Overview/Export.svg" alt="icon" />
               <div>Export</div>
