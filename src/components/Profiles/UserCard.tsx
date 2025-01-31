@@ -43,17 +43,17 @@ const UserCard: React.FC<UserCardProps> = ({
       />
       <h2 className="text-[24px] font-semibold text-center ">{name}</h2>
       {/* User Info */}
-      <div className="flex flex-col w-full gap-2 mt-3">
+      <div className="flex flex-col w-full gap-3 mt-3">
         <p className="text-sm ">Tag Name: {tagName}</p>
         <p className="text-sm ">Signed Up: {signedUp}</p>
         <p className="text-sm ">Contact: {contact}</p>
       </div>
 
       {/* Details Section */}
-      <div className="w-full mt-4 space-y-3">
+      <div className="w-full mt-8 space-y-3">
         {/* Last Trip */}
 
-        <div className="flex items-center justify-center gap-4 ">
+        <div className="flex items-center justify-center gap-2 ">
           <p className="text-sm text-gray-600">Last Trip Date:</p>
           <p className="font-semibold text-md">{lastTripDate}</p>
         </div>
@@ -61,7 +61,7 @@ const UserCard: React.FC<UserCardProps> = ({
         {/* Number of Trips */}
         <div className="flex items-center gap-4 ">
           <img src={tripsImage} alt="Trips" className="w-4 h-4" />
-          <div className="flex gap-4 ">
+          <div className="flex gap-2 ">
             <p className="text-sm text-gray-600">Trips Taken:</p>
             <p className="font-semibold text-md">{noOfTrips}</p>
           </div>
@@ -70,20 +70,20 @@ const UserCard: React.FC<UserCardProps> = ({
         {/* CO2 Avoided */}
         <div className="flex items-center gap-4">
           <img src={co2Image} alt="CO2" className="w-4 h-4" />
-          <div className="flex gap-4 ">
+          <div className="flex gap-2 ">
             <p className="text-sm text-gray-600">CO₂ Avoided:</p>
             <p className="font-semibold text-md">{co2Avoided}</p>
           </div>
         </div>
 
         {/* Credits Earned */}
-        <div className="flex items-center gap-4 ">
+        <div className="flex items-center gap-2 ">
           <img
             src={credsEarnedImage}
             alt="Credits Earned"
             className="w-4 h-4"
           />
-          <div className="flex gap-4 ">
+          <div className="flex gap-2 ">
             <p className="text-sm text-gray-600">Credits Earned :</p>
             <p className="font-semibold text-md">{credsEarned}</p>
           </div>
@@ -96,7 +96,7 @@ const UserCard: React.FC<UserCardProps> = ({
             alt="Credits Redeemed"
             className="w-4 h-4"
           />
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
             <p className="text-sm text-gray-600">Credits Redeemed:</p>
             <p className="font-semibold text-md">{credsRedeemed}</p>
           </div>

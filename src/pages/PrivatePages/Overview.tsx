@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BarGraph, Card1, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
-import { Search } from 'lucide-react';
+import { Search, TrendingUp } from 'lucide-react';
 
 function Overview() {
   const columns = [
@@ -150,7 +150,7 @@ function Overview() {
             {' '}
             Readings
           </div>
-          <div className="grid shadow-lg p-[16px] bg-white rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[18px] justify-items-center w-full">
+          <div className="grid shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-[16px] bg-white rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[18px] justify-items-center w-full">
             {cardData.map((data, index) => {
                 return (
                   <div key={index} className="min-w-[240px]">
@@ -174,8 +174,8 @@ function Overview() {
             {' '}
             Trips 
           </div>
-          <div className="relative bg-white shadow-lg min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
-            <div className="px-4 py-3 shadow-md sm:absolute top-3 right-3 rounded-xl">
+          <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
+            <div className="px-4 py-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] sm:absolute top-3 right-3 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex items-center justify-evenly w-full gap-[20px]">
                   <img
@@ -186,28 +186,28 @@ function Overview() {
                   <span className="text-[16px] font-semibold text-[#0E1E2B]">
                     Trips Insights 
                   </span>
-                  <div className='text-[#67AC5B]'>160</div>
+                  <div className='text-[#1A7DD3] font-semibold'>160</div>
                 </div>
               </div>
 
               <div className="flex flex-col items-center justify-center w-full">
                 <div className="pb-2 space-y-2">
-                  <div className="flex items-center justify-center gap-1 text-sm font-light text-gray-500">
-                    <img src="/Overview/Path 1008.png" alt="Trend Icon" />
-                    <span className="text-[#67AC5B] font-medium">+4%</span>
+                  <div className="flex items-center justify-center gap-1 text-sm font-semibold text-black">
+                  <TrendingUp className=" text-[#2F5C28]"/>
+                    <span className="text-[#2F5C28] font-semibold">+4%</span>
                     <span>vs last Year</span>
                   </div>
-                  <div className="flex justify-between gap-8">
+                  <div className="flex justify-between gap-8 ">
                     <div>Public Transit</div>
-                    <div className=" text-[#165AB6]">80</div>
+                    <div className=" text-[#165AB6] font-semibold">80</div>
                   </div>
-                  <div className="flex justify-between gap-8">
+                  <div className="flex justify-between gap-8 ">
                     <div>Zero Emission</div>
-                    <div className=" text-[#0E1E2B]">20</div>
+                    <div className=" text-[#0E1E2B] font-semibold">20</div>
                   </div>
-                  <div className="flex justify-between gap-8">
+                  <div className="flex justify-between gap-8 ">
                     <div>Ride Share</div>
-                    <div className=" text-[#2F5C28]">60</div>
+                    <div className=" text-[#2F5C28] font-semibold">60</div>
                   </div>
                 </div>
               </div>
