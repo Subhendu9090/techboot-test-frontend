@@ -51,15 +51,39 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            {columns.map((column, index) => (
-              <th
-                key={index}
-                className={`p-[16px] font-bold text-white bg-[#527088] text-start`}
-                style={{ width: column.size ? `${column.size}px` : '100px' }}
-              >
-                {column.header}
-              </th>
-            ))}
+            {columns.map((column, index) => {
+              if (column.accessor === 'status') {
+                return (
+                  <th
+                    key={index}
+                    className=" p-[16px] font-bold text-white bg-[#527088] text-start"
+                    style={{
+                      width: column.size ? `${column.size}px` : '100px',
+                    }}
+                  >
+                     <img
+                      src="/Overview/Info.svg"
+                      alt="icon"
+                      className="w-4 h-4 ml-[40px] cursor-pointer top-4 right-5"
+                    />
+                    {column.header}
+                   
+                  </th>
+                );
+              } else {
+                return (
+                  <th
+                    key={index}
+                    className={`p-[16px] font-bold text-white bg-[#527088] text-start`}
+                    style={{
+                      width: column.size ? `${column.size}px` : '100px',
+                    }}
+                  >
+                    {column.header}
+                  </th>
+                );
+              }
+            })}
           </tr>
         </thead>
         <tbody>
