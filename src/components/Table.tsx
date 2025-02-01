@@ -95,7 +95,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
               >
                 {columns.map((column, colIndex) => {
                   return (
-                    <td key={colIndex} className="p-[16px]">
+                    <td key={colIndex} className="p-[16px] text-center">
                       {renderCellContent(column, row)}
                     </td>
                   );
