@@ -1,6 +1,7 @@
-import { Edit, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
+import React from 'react';
 
-function Dashboard() {
+const Dashboard: React.FC = () => {
   return (
     <div className="flex flex-col justify-between w-full gap-4">
       <section className="flex flex-wrap w-full gap-2">
@@ -20,14 +21,19 @@ function Dashboard() {
               </div>
             </div>
             <div className="flex items-center justify-end gap-4 py-2">
-              <Edit className="w-4 h-4 " />
+              <img
+                src="/Profile/Group 1311.svg"
+                className="object-contain w-6 h-8 "
+                alt="Edit"
+                title="Edit"
+              />
               <button className="px-4 py-2 border rounded-lg ">Delete</button>
               <button className="px-4 py-2 bg-[#C1CAE3] rounded-lg ">
                 Add
               </button>
             </div>
             <div className="flex gap-4 px-4 ">
-              <input type="checkbox" className="w-6 h-6 bg-[#D9D9D9]" />
+              <input type="checkbox" className="w-6 h-6 " />
               <div>
                 <p className="font-medium ">John Smith</p>
                 <p className="font-normal ">
@@ -37,15 +43,15 @@ function Dashboard() {
             </div>
             <div className="flex flex-col gap-3 px-4">
               <div className="flex flex-wrap items-center gap-4 border-b-2">
-                <input type="checkbox" className="w-4 h-4" />
+                <input type="checkbox" className="w-5 h-5 " />
                 <p className="py-2 font-medium">John Smith</p>
               </div>
               <div className="flex flex-wrap items-center gap-4 border-b-2 ">
-                <input type="checkbox" className="w-4 h-4" />
+                <input type="checkbox" className="w-5 h-5 " />
                 <p className="py-2 font-medium">John Smith</p>
               </div>
               <div className="flex flex-wrap items-center gap-4 border-b-2 ">
-                <input type="checkbox" className="w-4 h-4" />
+                <input type="checkbox" className="w-5 h-5 " />
                 <p className="py-2 font-medium">John Smith</p>
               </div>
             </div>
@@ -84,15 +90,13 @@ function Dashboard() {
       </section>
 
       <section
-        className="relative flex flex-col justify-between px-6 py-16 bg-center bg-cover w-full min-h-[800px] "
+        className="flex flex-col justify-between w-full pt-12 bg-center bg-cover "
         style={{
           backgroundImage:
             "url('/Dashboard/We are reducing carbon footprints-2 1.svg')",
         }}
       >
-        {/* Overlay for readability */}
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-
+        
         {/* Content Section */}
         <div className="relative mx-auto text-white">
           <h2 className="md:text-[54px] font-bold text-[#F7A0A0] text-3xl">
@@ -101,42 +105,46 @@ function Dashboard() {
 
           <div className="p-4 mt-10 space-y-6 text-[#FDEAEC] gap-8 flex flex-col">
             {/* Step 1 */}
-            <div className="flex flex-col gap-4 ">
-              <h3 className="text-3xl md:text-[54px] font-semibold">John Smith</h3>
+            <div className="flex flex-col gap-4 pl-8 ">
+              <h3 className="text-3xl md:text-[54px] font-semibold">
+                John Smith
+              </h3>
               <p className=" md:pl-16 text-[24px] pl-8 text-gray-200">
-              Consistent in using public transport for the past 4 weeks
+                Consistent in using public transport for the past 4 weeks
               </p>
             </div>
 
             {/* Step 2 */}
             <div className="pl-[15%]  flex flex-col gap-4">
-              <h3 className="text-3xl md:text-[54px]  font-semibold">Emma Smith</h3>
+              <h3 className="text-3xl md:text-[54px]  font-semibold">
+                Emma Smith
+              </h3>
               <p className=" md:pl-16 text-[24px] pl-8 text-gray-200">
-              Consistent in using public transport for the past 4 weeks
+                Consistent in using public transport for the past 4 weeks
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="pl-[30%]  flex flex-col gap-4 ">
-              <h3 className="text-3xl md:text-[54px]  font-semibold">Michael Johnson</h3>
+              <h3 className="text-3xl md:text-[54px]  font-semibold">
+                Michael Johnson
+              </h3>
               <p className="pl-8 md:pl-16 text-gray-200 text-[24px]">
-              Consistent in using public transport for the past 4 weeks
+                Consistent in using public transport for the past 4 weeks
               </p>
             </div>
           </div>
         </div>
 
         {/* Logo Image at Bottom Right Corner */}
-        <div className="absolute bottom-0 right-0">
-          <img
-            src=" "
-            alt="Logo"
-            className="w-[200px] object-contain"
-          />
+        <div className=" p-8 text-[24px] bg-[#6B3122] flex-col gap-2 text-white mr-2 flex items-center self-end">
+          <div className="font-bold text-center ">CC Logo</div>
+          <div className="font-medium text-center ">Download the app</div>
+          <img src="/Profile/Vector.svg " alt="Logo" className="w-[120px] object-contain" />
         </div>
       </section>
     </div>
   );
-}
+};
 
 export default Dashboard;
