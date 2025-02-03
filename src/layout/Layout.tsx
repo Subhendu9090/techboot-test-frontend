@@ -27,7 +27,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         />
       </div>
 
-      <main className="flex-1 md:ml-[272px] overflow-y-auto">
+      <main className={`flex-1 md:ml-[272px] ${isSidebarOpen?"ml-[272px]":""} overflow-y-auto`}>
         {/* Header with mobile menu button */}
         <header className={`sticky top-0 ${isSidebarOpen ? " hidden": "" } bg-white border-b md:hidden`}>
           <div className="p-4">

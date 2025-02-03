@@ -120,7 +120,7 @@ const Profile: React.FC = () => {
       <div className="flex flex-wrap justify-end gap-2 outline-none">
         <div className="relative inline-block text-center">
           <CalendarDays className="absolute w-5 h-5 text-[#175AB6] transform -translate-y-1/2 left-3 top-1/2" />
-          <select className="py-2 pl-8 border text-[#175AB6] border-[#175AB6] outline-none rounded-xl">
+          <select className="py-2 pl-8 bg-transparent border text-[#175AB6] border-[#175AB6] outline-none rounded-xl">
             <option value="opt 1">Today</option>
             <option value="opt 2">Yesterday</option>
             <option value="opt 3">Last 7 Days</option>

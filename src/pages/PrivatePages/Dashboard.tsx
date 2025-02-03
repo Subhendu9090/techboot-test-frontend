@@ -3,8 +3,8 @@ import React from 'react';
 
 const Dashboard: React.FC = () => {
   return (
-    <div className="flex flex-col justify-between w-full gap-4">
-      <section className="flex flex-wrap w-full gap-2">
+    <div className="flex flex-col w-full gap-8">
+      <section className="flex flex-wrap justify-around w-full gap-2">
         <div className="flex flex-col gap-2 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-w-[360px] h-fit w-[39%]">
           <div className=" text-[#707070] p-4 font-bold text-[36px] bg-[#EFF4FF]">
             Highlight Users
@@ -99,14 +99,14 @@ const Dashboard: React.FC = () => {
         
         {/* Content Section */}
         <div className="relative mx-auto text-white">
-          <h2 className="md:text-[54px] font-bold text-[#F7A0A0] text-3xl">
+          <h2 className="md:text-[54px] p-2 font-bold text-[#F7A0A0] text-[30px]">
             We are celebrating the achievements of
           </h2>
 
           <div className="p-4 mt-10 space-y-6 text-[#FDEAEC] gap-8 flex flex-col">
             {/* Step 1 */}
-            <div className="flex flex-col gap-4 pl-8 ">
-              <h3 className="text-3xl md:text-[54px] font-semibold">
+            <div className="flex flex-col pl-8 ">
+              <h3 className="text-[30px] md:text-[54px] font-semibold">
                 John Smith
               </h3>
               <p className=" md:pl-16 text-[24px] pl-8 text-gray-200">
@@ -115,8 +115,8 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Step 2 */}
-            <div className="pl-[15%]  flex flex-col gap-4">
-              <h3 className="text-3xl md:text-[54px]  font-semibold">
+            <div className="pl-[15%]  flex flex-col ">
+              <h3 className="text-[30px] md:text-[54px]  font-semibold">
                 Emma Smith
               </h3>
               <p className=" md:pl-16 text-[24px] pl-8 text-gray-200">
@@ -125,8 +125,8 @@ const Dashboard: React.FC = () => {
             </div>
 
             {/* Step 3 */}
-            <div className="pl-[30%]  flex flex-col gap-4 ">
-              <h3 className="text-3xl md:text-[54px]  font-semibold">
+            <div className="pl-[30%]  flex flex-col ">
+              <h3 className="text-[30px] md:text-[54px]  font-semibold">
                 Michael Johnson
               </h3>
               <p className="pl-8 md:pl-16 text-gray-200 text-[24px]">

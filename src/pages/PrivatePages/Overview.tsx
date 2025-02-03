@@ -150,10 +150,10 @@ function Overview() {
             {' '}
             Readings
           </div>
-          <div className="grid shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-[16px] bg-white rounded-[16px] sm:grid-cols-2 grid-cols-1  text-center gap-[18px] justify-items-center w-full">
+          <div className=" shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-[16px] rounded-[16px] text-center gap-4 justify-around flex flex-wrap w-full">
             {cardData.map((data, index) => {
                 return (
-                  <div key={index} className="min-w-[240px]">
+                  <div key={index} className="min-w-[230px]">
                     <Card1
                       key={index}
                       headerImageUrl={data.headerImageUrl}
@@ -174,7 +174,7 @@ function Overview() {
             {' '}
             Trips 
           </div>
-          <div className="relative bg-white shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
+          <div className="relative shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
             <div className="px-4 py-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] sm:absolute top-3 right-3 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
                 <div className="flex items-center justify-evenly w-full gap-[20px]">

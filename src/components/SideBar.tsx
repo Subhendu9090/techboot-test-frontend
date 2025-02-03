@@ -82,10 +82,10 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
   };
 
   return (
-    <div className="m-[1vh]">
+    <div className="m-[1vh] relative">
       {/* Overlay for mobile */}
       <div
-        className={`fixed inset-0 bg-black/50 z-20 md:hidden ${isOpen ? 'block' : 'hidden'}`}
+        className={`absolute top-0 left-0 right-0 bg-black/50 z-20 md:hidden ${isOpen ? 'block' : 'hidden'}`}
         onClick={onClose}
       />
 
@@ -95,7 +95,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
           fixed top-0 left-0 z-30 w-[272px] h-[98vh] rounded-[16px] bg-[#527088] text-white
           flex flex-col
           transform transition-transform duration-300 ease-in-out
-          ${isOpen ? 'translate-x-0' : '-translate-x-full'}
+          ${isOpen ? '' : '-translate-x-full'}
           md:translate-x-0 md:static md:z-0
         `}
       >
