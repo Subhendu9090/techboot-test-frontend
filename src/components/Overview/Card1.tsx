@@ -36,7 +36,7 @@ const Card1: React.FC<Card1Props> = ({
             src={headerImageUrl}
             alt="Liability Icon"
           />
-          <span className="text-[16px] py-1 font-semibold text-center text-[#0E1E2B]">
+          <span className="text-[15px] py-1 font-semibold text-center text-[#0E1E2B]">
             {headerTitle}
           </span>
         </div>

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { BarGraph, Card1, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
-import { Search, TrendingUp } from 'lucide-react';
+import { Calendar, Search, TrendingUp } from 'lucide-react';
 
 function Overview() {
   const columns = [
@@ -136,7 +136,7 @@ function Overview() {
   };
   console.log(search);
   return (
-    <div className="flex flex-col gap-8 ">
+    <div className="flex flex-col ">
       {/* 1st section */}
       <section className="flex items-center justify-center w-full ">
         <p className=" text-[#130940] text-[32px] font-semibold">
@@ -170,10 +170,19 @@ function Overview() {
           </div>
         </div>
         <div className="w-full xl:w-1/2">
+        <div className='flex justify-between w-full '>
+          <div></div>
           <div className=" text-center text-[#0E1E2B] px-4 font-semibold text-[24px]">
             {' '}
             Trips 
           </div>
+          <div className=" flex items-center justify-around gap-2 text-white bg-[#175AB6] rounded-xl px-4 font-semibold text-[15px]">
+            {' '}
+            <span><Calendar/></span>
+            <p>Today</p> 
+          </div>
+        </div>
+          
           <div className="relative shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
             <div className="px-4 py-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] sm:absolute top-3 right-3 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
