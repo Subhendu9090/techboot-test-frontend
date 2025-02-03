@@ -5,12 +5,10 @@ import { paths } from '../../routes/Path';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { firebaseConfig } from '../../utils/FireBaseConfig';
-import { useAuth } from '../../contexts/Store';
 import { Alert } from '../../utils/Alert';
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
-  const { login } = useAuth();
   const [formData, setFormData] = useState({
     email: 'subhendu.jena@qwegle.com',
     password: '123456789',
@@ -74,10 +72,10 @@ const Login: React.FC = () => {
         formData.password
       );
 
-      login(userCredential.user.email, userCredential?.user?.accessToken);
+     navigate(`${paths.twoStepVerification}?email=${encodeURIComponent(userCredential.user.email)}&token=${encodeURIComponent(userCredential.user.accessToken)}`);
 
       console.log('Logged in user:', userCredential?.user);
-      navigate(paths.overview);
+      // navigate(paths.twoStepVerification);
     } catch (error: any) {
       console.log('Login Error', error);
       setAlertMessage(error.code || ' Something went Wrong ');

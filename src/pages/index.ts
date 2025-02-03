@@ -7,7 +7,7 @@ import Dashboard from './PrivatePages/Dashboard';
 import TripLog from './PrivatePages/TripLog';
 import Profile from "./PrivatePages/Profile";
 import IndividualUserInfo from "./PrivatePages/IndividualUserInfo";
-
+import Report from './PrivatePages/Report';
 export {
   Login,
   ForgotPassword,
@@ -17,5 +17,6 @@ export {
   Dashboard,
   TripLog,
   Profile,
-  IndividualUserInfo
+  IndividualUserInfo,
+  Report
 };

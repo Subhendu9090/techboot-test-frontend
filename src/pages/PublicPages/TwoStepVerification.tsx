@@ -1,5 +1,9 @@
 import React, { useState, useRef } from 'react';
 import { CustomButton } from '../../components';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { paths } from '../../routes/Path';
+import { useAuth } from '../../contexts/Store';
+import { Alert } from '../../utils/Alert';
 
 const TwoStepVerification = () => {
   const [verificationCode, setVerificationCode] = useState([
@@ -11,7 +15,6 @@ const TwoStepVerification = () => {
     '',
   ]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-  
 
   const handleInputChange = (index: number, value: string) => {
     if (value.length <= 1) {
@@ -34,30 +37,34 @@ const TwoStepVerification = () => {
     }
   };
 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const email = queryParams.get('email');
+  const token = queryParams.get('token');
+
+  console.log('User Email:', email);
+  console.log('Access Token:', token);
+  
+  const [showAlert, setShowAlert] = useState(false);
+  const {login}=useAuth()
+  const navigate = useNavigate();
   const handleVerifyCode = async (e: React.FormEvent) => {
     e.preventDefault();
-    // setLoading(true);
-
-    // try {
-    //   // Combine verification code
-    //   const code = verificationCode.join('');
-
-    //   // Verify the password reset code
-    //   await verifyPasswordResetCode(auth, code);
-
-    //   // If code is valid, proceed to reset password
-    //   await confirmPasswordReset(auth, code, newPassword);
-
-    //   // Navigate back to login
-    //   navigate(paths.login);
-    // } catch (error) {
-    //   console.error("Password reset verification error", error);
-    // } finally {
-    //   setLoading(false);
-    // }
+    let otp: string = '';
+    verificationCode.map((data) => (otp = otp + data));
+    console.log(otp);
+    
+    if (otp == "111111") {
+      login(email || "", token || "");
+      navigate(paths.overview);
+    }else{
+       setShowAlert(true)
+    }
   };
 
   return (
+    <>
     <div className="flex flex-col min-h-screen bg-white md:flex-row">
       {/* Left Side - Verification Form */}
       <div className="flex items-center justify-center w-full px-4 py-8 md:w-2/4 md:px-2">
@@ -90,11 +97,7 @@ const TwoStepVerification = () => {
 
             {/* Submit Button */}
             <div className="flex justify-center w-full">
-              <CustomButton
-                label="Verify"
-                type="submit"
-                size="medium"
-              />
+              <CustomButton label="Verify" type="submit" size="medium" />
             </div>
 
             {/* Resend Code */}
@@ -123,6 +126,15 @@ const TwoStepVerification = () => {
         />
       </div>
     </div>
+    {showAlert && (
+        <Alert
+          message={"Enter The Correct OTP"}
+          type="error"
+          duration={5000}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+    </>
   );
 };
 

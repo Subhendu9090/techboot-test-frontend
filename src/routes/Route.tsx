@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { paths } from './Path';
-import { Login, ForgotPassword, Overview, TwoStepVerification, Dashboard, TripLog, Profile, IndividualUserInfo } from '../pages';
+import { Login, ForgotPassword, Overview, TwoStepVerification, Dashboard, TripLog, Profile, IndividualUserInfo, Report } from '../pages';
 import Layout from '../layout/Layout';
 import SecureRoutes from './SecureRoutes';
 
@@ -13,6 +13,7 @@ const ProtectedLayout = () => {
         <Route path={paths.tripLog} element={<TripLog />} />
         <Route path={paths.individualUserInfo} element={<IndividualUserInfo />} />
         <Route path={paths.profile} element={<Profile />} />
+        <Route path={paths.reports} element={<Report />} />
       </Routes>
     </Layout>
   );
