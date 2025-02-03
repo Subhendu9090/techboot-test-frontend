@@ -98,14 +98,14 @@ const Dashboard: React.FC = () => {
       >
         
         {/* Content Section */}
-        <div className="relative mx-auto text-white">
-          <h2 className="md:text-[54px] p-2 font-bold text-[#F7A0A0] text-[30px]">
+        <div className="relative text-white">
+          <h2 className="md:text-[54px] text-center font-bold text-[#F7A0A0] text-[30px]">
             We are celebrating the achievements of
           </h2>
 
-          <div className="p-4 mt-10 space-y-6 text-[#FDEAEC] gap-8 flex flex-col">
+          <div className="p-4 space-y-6 text-[#FDEAEC] flex flex-col">
             {/* Step 1 */}
-            <div className="flex flex-col pl-8 ">
+            <div className="flex flex-col pl-12 ">
               <h3 className="text-[30px] md:text-[54px] font-semibold">
                 John Smith
               </h3>
