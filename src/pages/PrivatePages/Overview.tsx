@@ -128,7 +128,7 @@ function Overview() {
       backgroundColor: '#EDD15A',
     },
   ];
-  
+
   const date = new Date();
   const [search, setSearch] = useState<null | string>();
   const handelSearch = (e: any) => {
@@ -152,37 +152,39 @@ function Overview() {
           </div>
           <div className=" shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-[16px] rounded-[16px] text-center gap-4 justify-around flex flex-wrap w-full">
             {cardData.map((data, index) => {
-                return (
-                  <div key={index} className="min-w-[230px]">
-                    <Card1
-                      key={index}
-                      headerImageUrl={data.headerImageUrl}
-                      headerTitle={data.headerTitle}
-                      value={data.value}
-                      footerImageUrl={data.footerImageUrl}
-                      footerData={data.footerData}
-                      footerTitle={data.footerTitle}
-                      backgroundColor={data.backgroundColor}
-                    />
-                  </div>
-                );
+              return (
+                <div key={index} className="min-w-[230px]">
+                  <Card1
+                    key={index}
+                    headerImageUrl={data.headerImageUrl}
+                    headerTitle={data.headerTitle}
+                    value={data.value}
+                    footerImageUrl={data.footerImageUrl}
+                    footerData={data.footerData}
+                    footerTitle={data.footerTitle}
+                    backgroundColor={data.backgroundColor}
+                  />
+                </div>
+              );
             })}
           </div>
         </div>
         <div className="w-full xl:w-1/2">
-        <div className='flex justify-between w-full '>
-          <div></div>
-          <div className=" text-center text-[#0E1E2B] px-4 font-semibold text-[24px]">
-            {' '}
-            Trips 
+          <div className="flex justify-between w-full ">
+            <div></div>
+            <div className=" text-center text-[#0E1E2B] px-4 font-semibold text-[24px]">
+              {' '}
+              Trips
+            </div>
+            <div className=" flex items-center justify-around gap-2 text-white bg-[#175AB6] rounded-xl px-4 font-semibold text-[15px]">
+              {' '}
+              <span>
+                <Calendar />
+              </span>
+              <p>Today</p>
+            </div>
           </div>
-          <div className=" flex items-center justify-around gap-2 text-white bg-[#175AB6] rounded-xl px-4 font-semibold text-[15px]">
-            {' '}
-            <span><Calendar/></span>
-            <p>Today</p> 
-          </div>
-        </div>
-          
+
           <div className="relative shadow-[0px_4px_4px_rgba(0,0,0,0.25)] min-h-[440px] p-[16px] rounded-[16px] flex flex-col">
             <div className="px-4 py-3 shadow-[0px_4px_4px_rgba(0,0,0,0.25)] sm:absolute top-3 right-3 rounded-xl">
               <div className="flex items-center gap-3 mb-2">
@@ -193,16 +195,16 @@ function Overview() {
                     alt="Liability Icon"
                   />
                   <span className="text-[16px] font-semibold text-[#0E1E2B]">
-                    Trips Insights 
+                    Trips Insights
                   </span>
-                  <div className='text-[#1A7DD3] font-semibold'>160</div>
+                  <div className="text-[#1A7DD3] font-semibold">160</div>
                 </div>
               </div>
 
               <div className="flex flex-col items-center justify-center w-full">
                 <div className="pb-2 space-y-2">
                   <div className="flex items-center justify-center gap-1 text-sm font-semibold text-black">
-                  <TrendingUp className=" text-[#2F5C28]"/>
+                    <TrendingUp className=" text-[#2F5C28]" />
                     <span className="text-[#2F5C28] font-semibold">+4%</span>
                     <span>vs last Year</span>
                   </div>
@@ -244,7 +246,7 @@ function Overview() {
           </div>
         </div>
       </section>
-      
+
       <section>
         <div className="flex flex-wrap items-center justify-between w-full p-2 min-w-fit">
           <div className=" text-[#130940] text-[24px] font-semibold">
@@ -252,7 +254,7 @@ function Overview() {
           </div>
           <div className="flex flex-wrap gap-3 ">
             <div className="flex items-center gap-2 py-2 px-4 border hover:cursor-pointer border-[#165AB6] bg-white rounded-xl text-[#165AB6]">
-              <img className='' src="Overview/Export.svg" alt="icon" />
+              <img className="" src="Overview/Export.svg" alt="icon" />
               <div>Export</div>
             </div>
             <div className="flex hover:cursor-pointer items-center gap-2 p-2 text-white rounded-xl bg-[#165AB6]">
@@ -268,7 +270,7 @@ function Overview() {
                 value={search ?? ''}
                 onChange={handelSearch}
               ></input>
-              <Search className='text-blue-700 '/>
+              <Search className="text-blue-700 " />
             </div>
           </div>
         </div>

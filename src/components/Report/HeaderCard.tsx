@@ -10,8 +10,8 @@ const HeaderCard: React.FC<HeaderCardProps> = ({
   description = '',
 }: HeaderCardProps) => {
   return (
-    <div className=" shadow-lg max-w-[243px] p-8 rounded-2xl ">
-      <div className=' font-semibold text-[#130940] text-[24px]'>{title}</div>
+    <div className=" shadow-[0px_4px_4px_rgba(0,0,0,0.25)] max-w-[200px] py-8 px-4 rounded-2xl ">
+      <div className=' font-semibold text-[#130940] text-[18px]'>{title}</div>
       <div>{description}</div>
     </div>
   );
