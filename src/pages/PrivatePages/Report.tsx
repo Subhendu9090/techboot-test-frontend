@@ -56,7 +56,7 @@ const Report: React.FC = () => {
         <div className="flex flex-wrap gap-2 ">
           <div className="p-4 max-w-[260px] shadow-[0px_4px_4px_rgba(0,0,0,0.25)] rounded-2xl space-y-2 ">
             <div className="flex justify-between gap-2 ">
-              <img src="" alt="icon" />
+              <img src="/Report/Vector.svg" alt="icon" />
               <p className=" text-[24px] text-[#707070] font-bold">
                 Total Users
               </p>
