@@ -8,11 +8,12 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  TooltipProps,
 } from 'recharts';
 
-const ReportGraph:React.FC = () => {
+const ReportGraph: React.FC = () => {
   const data = Array.from({ length: 18 }, (_, index) => ({
-    name: `Item ${index + 1}`,
+    name: `Nov ${index + 1}`,
     value1: Math.floor(Math.random() * 100) + 20,
     value2: Math.floor(Math.random() * 100) + 20,
   }));
@@ -28,7 +29,8 @@ const ReportGraph:React.FC = () => {
             left: 5,
             bottom: 5,
           }}
-          barGap={-3}
+          barGap={-2}
+          barCategoryGap={6}
         >
           <defs>
             <pattern
@@ -59,13 +61,14 @@ const ReportGraph:React.FC = () => {
           <XAxis dataKey="name" fontSize={12} tick={{ fill: '#666' }} />
           <YAxis fontSize={12} tick={{ fill: '#666' }} />
           <Tooltip
-            contentStyle={{ backgroundColor: 'white', borderRadius: '8px' }}
+            content={<CustomTooltip/>}
           />
           <Legend
             layout="vertical"
             align="right"
             verticalAlign="middle"
             wrapperStyle={{ paddingLeft: '20px' }}
+            content={renderLegend} // Custom Legend
           />
           <Bar dataKey="value1" fill="url(#diagonalPattern)" name="Value 1" />
           <Bar dataKey="value2" fill="#FDEAEC" fillOpacity={1} name="Value 2" />
@@ -76,3 +79,56 @@ const ReportGraph:React.FC = () => {
 };
 
 export default ReportGraph;
+
+const renderLegend = (props: any) => {
+  const { payload } = props;
+  return (
+    <ul style={{ paddingLeft: '20px', listStyle: 'none' }}>
+      {payload.map((entry: any, index: any) => {
+        console.log('Entry', entry);
+        return (
+          <li
+            key={`item-${index}`}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              color: '#130940',
+              marginBottom: '5px',
+            }}
+          >
+             <svg width="20" height="20" style={{ marginRight: "8px" }}>
+            <rect
+              width="20"
+              height="20"
+              fill={entry.color} // Works for both solid colors and pattern URLs
+            />
+          </svg>
+            {entry.value}
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const CustomTooltip: React.FC<TooltipProps<number, string>> = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div
+        style={{
+          backgroundColor: "white",
+          borderRadius: "8px",
+          padding: "8px",
+          boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
+        }}
+      >
+        {payload.map((entry, index) => (
+          <p key={index} style={{ color: "#130940", fontWeight: "bold" }}>
+            {entry.name}: {entry.value}
+          </p>
+        ))}
+      </div>
+    );
+  }
+  return null;
+};

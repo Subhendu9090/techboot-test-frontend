@@ -24,8 +24,8 @@ const cards = [
 const Report: React.FC = () => {
   return (
     <div className="space-y-4 ">
-      <section className="flex justify-between">
-        <div className="flex flex-wrap justify-center gap-2 ">
+      <section className="flex flex-col-reverse justify-center gap-4 sm:flex-row sm:gap-0 sm:justify-between">
+        <div className="flex flex-wrap justify-center gap-1 ">
           {cards.map((card, index) => (
             <HeaderCard
               key={index}
@@ -34,7 +34,7 @@ const Report: React.FC = () => {
             />
           ))}
         </div>
-        <div className="flex gap-2 h-fit">
+        <div className="flex gap-1 h-fit">
           <select
             className="bg-[#C1CAE3] outline-none shadow-xl rounded-2xl p-2 "
             name=""
@@ -42,7 +42,7 @@ const Report: React.FC = () => {
           >
             <option value="">Filter By</option>
           </select>
-          <button className="px-8 py-2 border border-[#707070] shadow-xl outline-none h-fit rounded-2xl">
+          <button className="px-4 py-2 border border-[#707070] shadow-xl outline-none h-fit rounded-2xl">
             Export
           </button>
         </div>
