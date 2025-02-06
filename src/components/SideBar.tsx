@@ -58,14 +58,42 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       ],
     },
     {
+      title: 'Reports',
+      icon: '/Sidebar/Reports.svg',
+      activeIcon: '/Sidebar/ReportsActive.svg',
+      path: paths.reports,
+      subTitles: [
+        {
+          title: 'Total Trips',
+          icon: '/Sidebar/Total Trips Happened & Miles Saved.svg',
+          path: paths.reports,
+        },
+        {
+          title: 'Total Miles Saved',
+          icon: '/Sidebar/Co2Avoided.svg',
+          path: paths.reports,
+        },
+        {
+          title: 'Total Users',
+          icon: '/Sidebar/Total Users.svg',
+          path: paths.reports,
+        },
+        {
+          title: 'Total Creds Earned & Redeemed',
+          icon: '/Sidebar/TotalCredsEarned.svg',
+          path: paths.reports,
+        },
+        {
+          title: 'CO2 Avoided',
+          icon: '/Sidebar/CO2 Avoided.svg',
+          path: paths.reports,
+        },
+      ],
+    },
+    {
       title: 'Dashboard Control',
       icon: '/Sidebar/Dashboard Contrpl.svg',
       path: paths.dashboard,
-    },
-    {
-      title: 'Reports',
-      icon: '/Sidebar/Reports.svg',
-      path: paths.reports,
     },
     {
       title: 'Tags',
@@ -170,7 +198,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
                             key={subItem.title}
                             to={subItem.path || item.path}
                             className="
-                              flex duration-200 items-center pl-8 gap-1 py-2 
+                              flex duration-200 text-[#175AB6] items-center pl-8 gap-1 py-2 
                               hover:bg-[#0E1E2B]/50 
                             "
                           >

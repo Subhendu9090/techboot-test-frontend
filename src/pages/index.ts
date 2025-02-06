@@ -8,6 +8,9 @@ import TripLog from './PrivatePages/TripLog';
 import Profile from "./PrivatePages/Profile";
 import IndividualUserInfo from "./PrivatePages/IndividualUserInfo";
 import Report from './PrivatePages/Report';
+import Tags from "./PrivatePages/Tags"
+import PageNotFound from './PublicPages/PageNotFound';
+
 export {
   Login,
   ForgotPassword,
@@ -18,5 +21,7 @@ export {
   TripLog,
   Profile,
   IndividualUserInfo,
-  Report
+  Report,
+  Tags,
+  PageNotFound
 };

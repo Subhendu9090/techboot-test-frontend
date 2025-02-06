@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { paths } from './Path';
-import { Login, ForgotPassword, Overview, TwoStepVerification, Dashboard, TripLog, Profile, IndividualUserInfo, Report } from '../pages';
+import { Login, ForgotPassword, Overview, TwoStepVerification, Dashboard, TripLog, Profile, IndividualUserInfo, Report, Tags, PageNotFound } from '../pages';
 import Layout from '../layout/Layout';
 import SecureRoutes from './SecureRoutes';
 
@@ -14,6 +14,8 @@ const ProtectedLayout = () => {
         <Route path={paths.individualUserInfo} element={<IndividualUserInfo />} />
         <Route path={paths.profile} element={<Profile />} />
         <Route path={paths.reports} element={<Report />} />
+        <Route path={paths.tags} element={<Tags />} />
+        <Route path='*' element={<PageNotFound/>}/>
       </Routes>
     </Layout>
   );
