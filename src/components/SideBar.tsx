@@ -61,32 +61,32 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       title: 'Reports',
       icon: '/Sidebar/Reports.svg',
       activeIcon: '/Sidebar/ReportsActive.svg',
-      path: paths.reports,
+      path: paths.trips,
       subTitles: [
         {
           title: 'Total Trips',
           icon: '/Sidebar/Total Trips Happened & Miles Saved.svg',
-          path: paths.reports,
+          path: paths.trips,
         },
         {
           title: 'Total Miles Saved',
           icon: '/Sidebar/Co2Avoided.svg',
-          path: paths.reports,
+          path: paths.mileSaved,
         },
         {
           title: 'Total Users',
           icon: '/Sidebar/Total Users.svg',
-          path: paths.reports,
+          path: paths.totalUser,
         },
         {
           title: 'Total Creds Earned & Redeemed',
           icon: '/Sidebar/TotalCredsEarned.svg',
-          path: paths.reports,
+          path: paths.totalCreds,
         },
         {
           title: 'CO2 Avoided',
           icon: '/Sidebar/CO2 Avoided.svg',
-          path: paths.reports,
+          path: paths.co2Avoided,
         },
       ],
     },

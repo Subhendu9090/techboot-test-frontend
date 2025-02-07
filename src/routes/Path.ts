@@ -6,9 +6,13 @@ interface paths {
   dashboard: string;
   tripLog: string;
   tags: string;
-  reports: string;
+  trips: string;
   profile:string;
   individualUserInfo:string;
+  co2Avoided:string;
+  mileSaved:string;
+  totalUser:string;
+  totalCreds:string;
 }
 
 export const paths: paths = {
@@ -19,7 +23,11 @@ export const paths: paths = {
   dashboard: '/dashboard',
   tripLog: '/trip-log',
   tags: '/tags',
-  reports: '/reports',
+  trips: '/trips',
   profile: "/profile",
-  individualUserInfo:"/individual-user-info"
+  individualUserInfo:"/individual-user-info",
+  co2Avoided:"/co2-avoided",
+  mileSaved:"/mile-saved",
+  totalUser:"/total-user",
+  totalCreds:"/total-creds"
 };

@@ -8,6 +8,8 @@ import Card2 from './Overview/Card2';
 import UserCard from './Profiles/UserCard';
 import HeaderCard from './Report/HeaderCard';
 import ReportGraph from './Report/ReportGraph';
+import HeaderSection from './Report/HeaderSection';
+import GraphCard from './Report/GraphCard';
 
 export {
   CustomInput,
@@ -20,4 +22,6 @@ export {
   UserCard,
   HeaderCard,
   ReportGraph,
+  HeaderSection,
+  GraphCard
 };

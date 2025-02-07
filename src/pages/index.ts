@@ -7,9 +7,13 @@ import Dashboard from './PrivatePages/Dashboard';
 import TripLog from './PrivatePages/TripLog';
 import Profile from "./PrivatePages/Profile";
 import IndividualUserInfo from "./PrivatePages/IndividualUserInfo";
-import Report from './PrivatePages/Report';
+import Trips from './PrivatePages/Trips';
 import Tags from "./PrivatePages/Tags"
 import PageNotFound from './PublicPages/PageNotFound';
+import Co2Avoided from './PrivatePages/Co2Avoided';
+import MileSaved from './PrivatePages/MileSaved';
+import TotalCredsEarned from './PrivatePages/TotalCredsEarned';
+import TotalUsers from './PrivatePages/TotalUsers';
 
 export {
   Login,
@@ -21,7 +25,11 @@ export {
   TripLog,
   Profile,
   IndividualUserInfo,
-  Report,
+  Trips,
   Tags,
-  PageNotFound
+  PageNotFound,
+  Co2Avoided,
+  MileSaved,
+  TotalCredsEarned,
+  TotalUsers
 };

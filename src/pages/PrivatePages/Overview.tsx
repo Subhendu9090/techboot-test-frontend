@@ -139,7 +139,7 @@ function Overview() {
     <div className="flex flex-col ">
       {/* 1st section */}
       <section className="flex items-center justify-center w-full ">
-        <p className=" text-[#130940] text-[32px] font-semibold">
+        <p className=" text-[#130940] text-2xl font-semibold">
           {formatDateToDDMMYYYY(date)}
         </p>
       </section>
