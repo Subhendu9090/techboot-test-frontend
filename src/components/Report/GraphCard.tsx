@@ -43,7 +43,7 @@ const GraphCard: React.FC<GraphCardProps> = ({ title, data, filled }) => {
                 <span className="text-[16px] font-semibold text-[#0E1E2B]">
                   Creds Insights
                 </span>
-                <div className="text-[#1A7DD3] font-semibold">160</div>
+                <div className="text-[#275C42] font-semibold">160</div>
               </div>
             </div>
 
@@ -56,11 +56,11 @@ const GraphCard: React.FC<GraphCardProps> = ({ title, data, filled }) => {
                 </div>
                 <div className="flex justify-between gap-8 ">
                   <div>Active Trips</div>
-                  <div className=" text-[#165AB6] font-semibold">200</div>
+                  <div className=" text-[#275C42] font-semibold">200</div>
                 </div>
                 <div className="flex justify-between gap-8 ">
                   <div>Inactive Trips</div>
-                  <div className=" text-[#0E1E2B] font-semibold">800</div>
+                  <div className=" text-[#275C42] font-semibold">800</div>
                 </div>
               </div>
             </div>
