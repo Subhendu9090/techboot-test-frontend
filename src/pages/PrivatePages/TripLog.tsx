@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import { Table } from '../../components';
 import { Search } from 'lucide-react';
 
 const TripLog = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   const columns = [
     {
       header: 'Status',
@@ -21,7 +25,9 @@ const TripLog = () => {
         <div className="flex flex-col">
           <div>Name: {row.userInfo.name}</div>
           <div className="">Email: {row.userInfo.email}</div>
-          <div className="">Last Date of Trip: {row.userInfo.lastDateOfTrip}</div>
+          <div className="">
+            Last Date of Trip: {row.userInfo.lastDateOfTrip}
+          </div>
         </div>
       ),
     },
@@ -103,7 +109,15 @@ const TripLog = () => {
           </div>
         </div>
       </div>
-      <Table columns={columns} data={data} />
+      <Table
+        currentPage={currentPage}
+        rowsPerPage={rowsPerPage}
+        totalItems={100}
+        onPageChange={setCurrentPage}
+        onRowsPerPageChange={setRowsPerPage}
+        columns={columns}
+        data={data}
+      />
     </div>
   );
 };

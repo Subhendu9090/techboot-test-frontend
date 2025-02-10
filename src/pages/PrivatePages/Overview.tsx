@@ -1,44 +1,53 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BarGraph, Card1, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
 import { Calendar, Search, TrendingUp } from 'lucide-react';
 import { TableDetails } from '../../DialogBox';
+import { overViewTableData } from '../../controllers/overview/overviewController';
 
 function Overview() {
-  
-  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState(2);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [tableData, setTableData] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const columns = [
     {
       header: 'Status',
-      accessor: 'status',
+      accessor: 'user_status',
       size: 80,
       render: (row: any) => (
-        <button className="px-2 py-1 text-green-500 bg-transparent border border-green-500 text-[14px] rounded-full">
-          {row.status}
+        <button
+          className={`px-2 py-1 ${row?.user_status === 'Active' ? 'text-green-500 border-green-500' : 'text-red-500 border-red-500 '} bg-transparent border  text-[14px] rounded-full`}
+        >
+          {row?.user_status}
         </button>
       ),
     },
     {
       header: 'User Information',
-      accessor: 'userInfo',
+      accessor: 'user_info',
       size: 300,
       render: (row: any) => (
         <div className="flex flex-col">
-          <div>Name:{row.userInfo.name}</div>
-          <div className="">Email:{row.userInfo.email}</div>
-          <div className="">Last Date of Trip{row.userInfo.lastDateOfTrip}</div>
+          <div>Name:{row?.user_info?.username}</div>
+          <div className="">Email:{row?.user_info?.email}</div>
+          <div className="">
+            Last Date of Trip :
+            {formatDateToDDMMYYYY(row?.user_info?.last_trip_date)}
+          </div>
         </div>
       ),
     },
-    { header: 'Trip Type/s', accessor: 'tripType', size: 60 },
-    { header: 'No. Of Trips', accessor: 'tripsCount', size: 80 },
-    { header: 'CO2 Avoided', accessor: 'co2Avoided', size: 80 },
-    { header: 'Miles Saved', accessor: 'milesSaved', size: 80 },
-    { header: 'Creds Earned', accessor: 'credsEarned', size: 50 },
-    { header: 'Creds Redeemed', accessor: 'credsRedeemed', size: 50 },
-    { header: 'Liability', accessor: 'liability', size: 50 },
+    { header: 'Trip Type/s', accessor: 'trip_types', size: 60 },
+    { header: 'No. Of Trips', accessor: 'num_trips', size: 80 },
+    { header: 'CO2 Avoided', accessor: 'co2_avoided', size: 80 },
+    { header: 'Miles Saved', accessor: 'miles_saved', size: 80 },
+    { header: 'Creds Earned', accessor: 'creds_redeemed', size: 50 },
+    { header: 'Creds Redeemed', accessor: 'creds_redeemed', size: 50 },
     {
       header: 'Details',
       size: 50,
@@ -47,46 +56,32 @@ function Overview() {
         <div className="relative">
           <img
             className="hover:cursor-pointer w-[30px] h-[40px]"
-            src={row.details}
+            src="Overview/Row Details Icon.png"
             alt="icon"
-            onClick={() => setDialogOpen(true)}
+            onClick={() =>
+              setSelectedRow(
+                selectedRow === row?.user_info?.username
+                  ? null
+                  : row?.user_info?.username
+              )
+            }
           />
-          {dialogOpen && (
+          {selectedRow === row?.user_info?.username && (
             <div className="absolute left-[-200px] z-50  top-10">
               <TableDetails
-               image={row.image}
-               carbonCred={row.carbonCred} 
-               name={row.userInfo.name}
-               tags={row.tags}
-               address={ row.address}
-              onClose={() => setDialogOpen(false)} />
+                image={row?.image}
+                carbonCred={row?.creds_redeemed}
+                name={row?.user_info?.username}
+                tags={row?.tags}
+                address={
+                  row?.user_info?.home_address + row?.user_info?.home_address
+                }
+                onClose={() => setSelectedRow(null)}
+              />
             </div>
           )}
         </div>
       ),
-    },
-  ];
-
-  const data = [
-    {
-      status: 'Active',
-      userInfo: {
-        name: 'John Doe',
-        email: 'john@example.com',
-        lastDateOfTrip: '2025-01-20',
-      },
-      tripType: 'Business',
-      tripsCount: 12,
-      co2Avoided: '24 kg',
-      milesSaved: '150 miles',
-      credsEarned: 50,
-      credsRedeemed: 20,
-      liability: '$30',
-      details: 'Overview/Row Details Icon.png',
-      image: '/Profile/divyank-sachdeva-iQLqpFqzwnc-unsplash 9.svg',  
-      carbonCred: 78,
-      tags: ['Eco-Friendly', 'Frequent Traveler'],
-      address: '123 Green Street, EcoCity, Earth',
     },
   ];
 
@@ -152,10 +147,34 @@ function Overview() {
   const handelSearch = (e: any) => {
     setSearch(e.target.value);
   };
-  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const response = await overViewTableData(
+          'QWEGLE',
+          currentPage,
+          rowsPerPage
+        );
+        console.log('Response', response);
+        if (response.success) {
+          setTotalItems(response?.data?.total_users);
+          setTableData(response?.data?.user_data);
+        }
+      } catch (error) {
+        console.log('Error in getting table data', error);
+        setTableData([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [currentPage, rowsPerPage]);
+
   return (
     <div className="flex flex-col ">
-      
       <section className="flex items-center justify-center w-full ">
         <p className=" text-[#130940] text-2xl font-semibold">
           {formatDateToDDMMYYYY(date)}
@@ -292,7 +311,16 @@ function Overview() {
             </div>
           </div>
         </div>
-        <Table columns={columns} data={data} />
+        <Table
+          columns={columns}
+          data={tableData}
+          currentPage={currentPage}
+          rowsPerPage={rowsPerPage}
+          totalItems={totalItems}
+          onPageChange={setCurrentPage}
+          onRowsPerPageChange={setRowsPerPage}
+          isLoading={isLoading}
+        />
       </section>
     </div>
   );

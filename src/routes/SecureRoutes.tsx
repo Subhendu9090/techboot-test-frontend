@@ -14,7 +14,6 @@ const SecureRoutes: React.FC<LayoutProps> = ({ children }) => {
   useEffect(() => {
     const savedToken = localStorage.getItem('authToken');
     const savedUserEmail = localStorage.getItem('authUser');
-    console.log(savedToken, savedUserEmail);
 
     if (savedToken && savedUserEmail) {
       try {
