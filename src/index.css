@@ -46,6 +46,7 @@
 body {
   font-family: var(--font-secondary);
   /* margin: 10px; */
+  background-color: white;
 }
 
 h1, h2, h3 {
