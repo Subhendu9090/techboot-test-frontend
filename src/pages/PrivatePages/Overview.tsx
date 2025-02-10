@@ -3,16 +3,20 @@ import { BarGraph, Card1, Table } from '../../components';
 import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
 import { Calendar, Search, TrendingUp } from 'lucide-react';
+import { TableDetails } from '../../DialogBox';
 
 function Overview() {
+  
+  const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+
   const columns = [
     {
       header: 'Status',
       accessor: 'status',
       size: 80,
-      render: (status: any) => (
+      render: (row: any) => (
         <button className="px-2 py-1 text-green-500 bg-transparent border border-green-500 text-[14px] rounded-full">
-          {status}
+          {row.status}
         </button>
       ),
     },
@@ -20,11 +24,11 @@ function Overview() {
       header: 'User Information',
       accessor: 'userInfo',
       size: 300,
-      render: (userInfo: any) => (
+      render: (row: any) => (
         <div className="flex flex-col">
-          <div>Name:{userInfo.name}</div>
-          <div className="">Email:{userInfo.email}</div>
-          <div className="">Last Date of Trip{userInfo.lastDateOfTrip}</div>
+          <div>Name:{row.userInfo.name}</div>
+          <div className="">Email:{row.userInfo.email}</div>
+          <div className="">Last Date of Trip{row.userInfo.lastDateOfTrip}</div>
         </div>
       ),
     },
@@ -39,15 +43,25 @@ function Overview() {
       header: 'Details',
       size: 50,
       accessor: 'details',
-      render: (url: any) => (
-        <div>
-          {
-            <img
-              className=" hover:cursor-pointer w-[30px] h-[40px] "
-              src={url}
-              alt="icon"
-            />
-          }
+      render: (row: any) => (
+        <div className="relative">
+          <img
+            className="hover:cursor-pointer w-[30px] h-[40px]"
+            src={row.details}
+            alt="icon"
+            onClick={() => setDialogOpen(true)}
+          />
+          {dialogOpen && (
+            <div className="absolute left-[-200px] z-50  top-10">
+              <TableDetails
+               image={row.image}
+               carbonCred={row.carbonCred} 
+               name={row.userInfo.name}
+               tags={row.tags}
+               address={ row.address}
+              onClose={() => setDialogOpen(false)} />
+            </div>
+          )}
         </div>
       ),
     },
@@ -69,6 +83,10 @@ function Overview() {
       credsRedeemed: 20,
       liability: '$30',
       details: 'Overview/Row Details Icon.png',
+      image: '/Profile/divyank-sachdeva-iQLqpFqzwnc-unsplash 9.svg',  
+      carbonCred: 78,
+      tags: ['Eco-Friendly', 'Frequent Traveler'],
+      address: '123 Green Street, EcoCity, Earth',
     },
   ];
 
@@ -134,10 +152,10 @@ function Overview() {
   const handelSearch = (e: any) => {
     setSearch(e.target.value);
   };
-  console.log(search);
+  
   return (
     <div className="flex flex-col ">
-      {/* 1st section */}
+      
       <section className="flex items-center justify-center w-full ">
         <p className=" text-[#130940] text-2xl font-semibold">
           {formatDateToDDMMYYYY(date)}
@@ -257,7 +275,7 @@ function Overview() {
               <img className="" src="Overview/Export.svg" alt="icon" />
               <div>Export</div>
             </div>
-            <div className="flex hover:cursor-pointer items-center gap-2 p-2 text-white rounded-xl bg-[#165AB6]">
+            <div className="flex hover:cursor-pointer items-center gap-2 px-4 py-2 text-white rounded-xl bg-[#165AB6]">
               <img src="Overview/Filter & Sort Icon.svg" alt="icon" />
               <div>Filter & Sort</div>
             </div>

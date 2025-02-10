@@ -7,9 +7,9 @@ const TripLog = () => {
       header: 'Status',
       accessor: 'status',
       size: 80,
-      render: (status: string) => (
+      render: (row: any) => (
         <div
-          className={` ${status == 'Active' ? 'bg-[#DBF2E5] border-[#6CEAC0]' : 'bg-[#FDEAEC] border-[#FE696A]'} w-[30px] h-[30px] border  rounded-md`}
+          className={` ${row?.status == 'Active' ? 'bg-[#DBF2E5] border-[#6CEAC0]' : 'bg-[#FDEAEC] border-[#FE696A]'} w-[30px] h-[30px] border  rounded-md`}
         ></div>
       ),
     },
@@ -17,11 +17,11 @@ const TripLog = () => {
       header: 'User Information',
       accessor: 'userInfo',
       size: 300,
-      render: (userInfo: any) => (
+      render: (row: any) => (
         <div className="flex flex-col">
-          <div>Name: {userInfo.name}</div>
-          <div className="">Email: {userInfo.email}</div>
-          <div className="">Last Date of Trip: {userInfo.lastDateOfTrip}</div>
+          <div>Name: {row.userInfo.name}</div>
+          <div className="">Email: {row.userInfo.email}</div>
+          <div className="">Last Date of Trip: {row.userInfo.lastDateOfTrip}</div>
         </div>
       ),
     },
@@ -34,12 +34,12 @@ const TripLog = () => {
       header: 'Details',
       size: 50,
       accessor: 'details',
-      render: (url: any) => (
+      render: (row: any) => (
         <div>
           {
             <img
               className=" hover:cursor-pointer w-[30px] h-[40px] "
-              src={url}
+              src={row?.details}
               alt="icon"
             />
           }

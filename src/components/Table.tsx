@@ -36,7 +36,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
 
   const renderCellContent = (column: Column, row: Record<string, any>) => {
     if (column.render) {
-      return column.render(row[column.accessor]);
+      return column.render(row);
     }
 
     const value = column.accessor

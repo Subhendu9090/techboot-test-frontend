@@ -129,7 +129,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       >
         {/* Mobile close button */}
         <button
-          className="absolute p-2 text-white top-4 right-4 md:hidden"
+          className="absolute p-2 text-black top-4 right-4 md:hidden"
           onClick={onClose}
         >
           <X size={24} />
