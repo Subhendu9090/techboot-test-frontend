@@ -70,6 +70,9 @@ const IndividualUserInfo: React.FC = () => {
   const handelSearch = (e: any) => {
     setSearch(e.target.value);
   };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
   return (
     <div className="flex flex-col gap-4 ">
       <section className="flex flex-wrap items-center justify-center w-full gap-2">
@@ -151,7 +154,11 @@ const IndividualUserInfo: React.FC = () => {
             </div>
           </div>
         </div>
-        <Table data={data} columns={columns} />
+        <Table currentPage={currentPage}
+        rowsPerPage={rowsPerPage}
+        totalItems={100}
+        onPageChange={setCurrentPage}
+        onRowsPerPageChange={setRowsPerPage} data={data} columns={columns} />
       </section>
     </div>
   );

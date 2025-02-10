@@ -103,7 +103,7 @@ const Table: React.FC<TableProps> = ({
         </tbody>
       </table>
 
-      <div className="flex items-center justify-end mt-4 space-x-2">
+      <div className="flex items-center justify-end pb-4 mt-4 space-x-2">
         <div>Rows per page </div>
         <select
           value={rowsPerPage}
