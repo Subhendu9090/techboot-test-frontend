@@ -4,10 +4,12 @@ import { Card1Props } from '../../components/Overview/Card1';
 import { formatDateToDDMMYYYY } from '../../utils/util';
 import { Calendar, Search, TrendingUp } from 'lucide-react';
 import { TableDetails } from '../../DialogBox';
-import { overViewTableData } from '../../controllers/overview/overviewController';
+import { overViewCardData, overViewTableData } from '../../controllers/overview/overviewController';
+import { useAuth } from '../../contexts/Store';
+import cardData from '../../utils/ConstantValues/OverView/CardData';
 
 function Overview() {
-  const [currentPage, setCurrentPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [tableData, setTableData] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
@@ -85,93 +87,122 @@ function Overview() {
     },
   ];
 
-  const cardData: Card1Props[] = [
-    {
-      headerImageUrl: '/Overview/No. of trips icon.svg',
-      headerTitle: 'Trips',
-      value: '200',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: '#EFF4FF',
-    },
-    {
-      headerImageUrl: '/Overview/Total Users.svg',
-      headerTitle: 'Users',
-      value: '200',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: '#E0F9DD',
-    },
-    {
-      headerImageUrl: '/Overview/Total Creds Icon.svg',
-      headerTitle: ' Creds Earned',
-      value: '200',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: 'rgb(132 154 173)',
-    },
-    {
-      headerImageUrl: '/Overview/Vector.svg',
-      headerTitle: ' CO2 Avoided',
-      value: '600',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: '#E0F9DD',
-    },
-    {
-      headerImageUrl: '/Overview/points-and-dollars-exchange-svgrepo-com 2.svg',
-      headerTitle: 'Creds Redeemed',
-      value: '27',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: 'rgb(129 172 231)',
-    },
-    {
-      headerImageUrl: '/Overview/Miles Saved.svg',
-      headerTitle: 'Miles Saved',
-      value: '400',
-      footerImageUrl: '/Overview/Path 1008.png',
-      footerData: '+4%',
-      footerTitle: 'vs last quarter',
-      backgroundColor: '#EDD15A',
-    },
-  ];
-
   const date = new Date();
   const [search, setSearch] = useState<null | string>();
   const handelSearch = (e: any) => {
     setSearch(e.target.value);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      try {
-        const response = await overViewTableData(
-          'QWEGLE',
-          currentPage,
-          rowsPerPage
-        );
-        console.log('Response', response);
-        if (response.success) {
-          setTotalItems(response?.data?.total_users);
-          setTableData(response?.data?.user_data);
-        }
-      } catch (error) {
-        console.log('Error in getting table data', error);
-        setTableData([]);
-      } finally {
-        setIsLoading(false);
+  let { token } = useAuth();
+  
+  const fetchTableData = async () => {
+    setIsLoading(true);
+    try {
+      if (token === 'undefined' || token === null) {
+        token = '';
       }
-    };
-
-    fetchData();
+      const response = await overViewTableData(
+        'QWEGLE',
+        currentPage,
+        rowsPerPage,
+        token
+      );
+      console.log('Table data Response', response);
+      if (response.success) {
+        setTotalItems(response?.data?.total_users);
+        setTableData(response?.data?.user_data);
+      }
+    } catch (error) {
+      console.log('Error in getting table data', error);
+      setTableData([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchTableData();
   }, [currentPage, rowsPerPage]);
+
+  const [cardsData,setCardsData] = useState(cardData)
+
+  const fetchCardData = async () => {
+    try {
+      if (token === 'undefined' || token === null) {
+        token = '';
+      }
+  
+      const response = await overViewCardData('QWEGLE', 2, 2024, token);
+  
+      if (response.success) {
+        const apiData = response.data;
+        const updatedCardData: Card1Props[] = [
+          {
+            headerImageUrl: '/Overview/No. of trips icon.svg',
+            headerTitle: 'Trips',
+            value: apiData.current_period.data.total_trips.toString(),
+            footerImageUrl: '/Overview/Path 1008.png',
+            footerData: `${apiData.growth.total_trips}%`,
+            footerTitle: 'vs last quarter',
+            backgroundColor: '#EFF4FF',
+          },
+          {
+            headerImageUrl: '/Overview/Total Users.svg',
+            headerTitle: 'Users',
+            value: apiData.current_period.data.total_users.toString(),
+            footerImageUrl: '/Overview/Path 1008.png',
+            footerData: `${apiData.growth.total_users}%`,
+            footerTitle: 'vs last quarter',
+            backgroundColor: '#E0F9DD',
+          },
+          {
+            headerImageUrl: '/Overview/Total Creds Icon.svg',
+            headerTitle: 'Creds Earned',
+            value: apiData.current_period.data.total_creds_earned.toString(),
+            footerImageUrl: '/Overview/Path 1008.png',
+            footerData: `${apiData.growth.total_creds_earned}%`,
+            footerTitle: 'vs last quarter',
+            backgroundColor: 'rgb(132 154 173)',
+          },
+          {
+            headerImageUrl: '/Overview/Vector.svg',
+            headerTitle: 'CO2 Avoided',
+            value: apiData.current_period.data.co2_avoided.toString(),
+            footerImageUrl: '/Overview/Path 1008.png',
+            footerData: `${apiData.growth.co2_avoided}%`,
+            footerTitle: 'vs last quarter',
+            backgroundColor: '#E0F9DD',
+          },
+          {
+            headerImageUrl: '/Overview/points-and-dollars-exchange-svgrepo-com 2.svg',
+            headerTitle: 'Creds Redeemed',
+            value: apiData.current_period.data.total_creds_redeemed.toString(),
+            footerImageUrl: '/Overview/Path 1008.png',
+            footerData: `${apiData.growth.total_creds_redeemed}%`,
+            footerTitle: 'vs last quarter',
+            backgroundColor: 'rgb(129 172 231)',
+          },
+          {
+            headerImageUrl: '/Overview/Miles Saved.svg',
+            headerTitle: 'Miles Saved',
+            value: apiData.current_period.data.miles_saved.toString(),
+            footerImageUrl: '/Overview/Path 1008.png',
+            footerData: `${apiData.growth.miles_saved}%`,
+            footerTitle: 'vs last quarter',
+            backgroundColor: '#EDD15A',
+          },
+        ];
+        setCardsData(updatedCardData);
+      }
+  
+      console.log('Card data Response', response);
+    } catch (error) {
+      console.log('Error in getting table data', error);
+    }
+  };
+  
+  useEffect(()=>{
+    fetchCardData()
+  },[])
+console.log("Cards Data ",cardsData);
 
   return (
     <div className="flex flex-col ">
@@ -188,7 +219,7 @@ function Overview() {
             Readings
           </div>
           <div className=" shadow-[0px_4px_4px_rgba(0,0,0,0.25)] p-[16px] rounded-[16px] text-center gap-4 justify-around flex flex-wrap w-full">
-            {cardData.map((data, index) => {
+            {cardsData.map((data, index) => {
               return (
                 <div key={index} className="min-w-[230px]">
                   <Card1

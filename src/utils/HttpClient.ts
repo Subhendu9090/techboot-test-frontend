@@ -10,7 +10,6 @@ const apiCall = async (
   contentType: string | null = null
 ) => {
   try {
-    // Correct Axios configuration
     let config: AxiosRequestConfig = {
       method: method,
       url: API_BASE_URL + uri,

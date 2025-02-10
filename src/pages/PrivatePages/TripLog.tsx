@@ -1,11 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Table } from '../../components';
 import { Search } from 'lucide-react';
+import { overViewTableData } from '../../controllers/overview/overviewController';
+import { useAuth } from '../../contexts/Store';
+import { formatDateToDDMMYYYY } from '../../utils/util';
 
 const TripLog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-
+  const [loading , setIsLoading]=useState(false)
+  const [tableData, setTableData] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
+  
   const columns = [
     {
       header: 'Status',
@@ -13,39 +19,40 @@ const TripLog = () => {
       size: 80,
       render: (row: any) => (
         <div
-          className={` ${row?.status == 'Active' ? 'bg-[#DBF2E5] border-[#6CEAC0]' : 'bg-[#FDEAEC] border-[#FE696A]'} w-[30px] h-[30px] border  rounded-md`}
+          className={` ${row?.user_status == 'Active' ? 'bg-[#DBF2E5] border-[#6CEAC0]' : 'bg-[#FDEAEC] border-[#FE696A]'} w-[30px] h-[30px] border  rounded-md`}
         ></div>
       ),
     },
     {
       header: 'User Information',
-      accessor: 'userInfo',
+      accessor: 'user_info',
       size: 300,
       render: (row: any) => (
         <div className="flex flex-col">
-          <div>Name: {row.userInfo.name}</div>
-          <div className="">Email: {row.userInfo.email}</div>
+          <div>Name:{row?.user_info?.username}</div>
+          <div className="">Email:{row?.user_info?.email}</div>
           <div className="">
-            Last Date of Trip: {row.userInfo.lastDateOfTrip}
+            Last Date of Trip :
+            {formatDateToDDMMYYYY(row?.user_info?.last_trip_date)}
           </div>
         </div>
       ),
     },
-    { header: 'Trip Type/s', accessor: 'tripType', size: 60 },
-    { header: 'No. Of Trips', accessor: 'tripsCount', size: 80 },
-    { header: 'CO2 Avoided', accessor: 'co2Avoided', size: 80 },
-    { header: 'Creds Earned', accessor: 'credsEarned', size: 50 },
-    { header: 'Creds Redeemed', accessor: 'credsRedeemed', size: 50 },
+    { header: 'Trip Type/s', accessor: 'trip_types', size: 60 },
+    { header: 'No. Of Trips', accessor: 'num_trips', size: 80 },
+    { header: 'CO2 Avoided', accessor: 'co2_avoided', size: 80 },
+    { header: 'Creds Earned', accessor: 'creds_redeemed', size: 50 },
+    { header: 'Creds Redeemed', accessor: 'creds_redeemed', size: 50 },
     {
       header: 'Details',
       size: 50,
       accessor: 'details',
-      render: (row: any) => (
+      render: () => (
         <div>
           {
             <img
               className=" hover:cursor-pointer w-[30px] h-[40px] "
-              src={row?.details}
+              src="Overview/Row Details Icon.png"
               alt="icon"
             />
           }
@@ -54,22 +61,35 @@ const TripLog = () => {
     },
   ];
 
-  const data = [
-    {
-      status: 'Active',
-      userInfo: {
-        name: 'John Doe',
-        email: 'john@example.com',
-        lastDateOfTrip: '2025-01-20',
-      },
-      tripType: 'Business',
-      tripsCount: 12,
-      co2Avoided: '24 kg',
-      credsEarned: 50,
-      credsRedeemed: 20,
-      details: 'Overview/Row Details Icon.png',
-    },
-  ];
+  let { token } = useAuth();
+  
+  const fetchTableData = async () => {
+    setIsLoading(true);
+    try {
+      if (token === 'undefined' || token === null) {
+        token = '';
+      }
+      const response = await overViewTableData(
+        'QWEGLE',
+        currentPage,
+        rowsPerPage,
+        token
+      );
+      console.log('Table data Response', response);
+      if (response.success) {
+        setTotalItems(response?.data?.total_users);
+        setTableData(response?.data?.user_data);
+      }
+    } catch (error) {
+      console.log('Error in getting table data', error);
+      setTableData([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchTableData();
+  }, [currentPage, rowsPerPage]);
 
   return (
     <div className="flex flex-col gap-4 ">
@@ -112,11 +132,12 @@ const TripLog = () => {
       <Table
         currentPage={currentPage}
         rowsPerPage={rowsPerPage}
-        totalItems={100}
+        totalItems={totalItems}
         onPageChange={setCurrentPage}
         onRowsPerPageChange={setRowsPerPage}
         columns={columns}
-        data={data}
+        data={tableData}
+        isLoading={loading}
       />
     </div>
   );
