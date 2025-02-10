@@ -1,5 +1,5 @@
 import { TrendingUp } from 'lucide-react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -17,13 +17,25 @@ interface GraphCardProps {
 }
 
 const GraphCard: React.FC<GraphCardProps> = ({ title, data, filled }) => {
-  
+  const [barSize, setBarSize] = useState(getBarSize());
+
+  function getBarSize() {
+    if (window.innerWidth < 600) return 20;
+    if (window.innerWidth < 1024) return 30;
+    return 40;
+  }
+
+  useEffect(() => {
+    const handleResize = () => setBarSize(getBarSize());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div className="w-full p-4 bg-white rounded-lg">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex flex-col flex-wrap items-center justify-between mb-4 space-y-4 md:flex-row">
         <h2 className="text-lg font-semibold">{title}</h2>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-4">
           <div className="flex flex-col gap-4 ">
             {filled.map((data, index) => (
               <div key={index} className="flex items-center gap-3 ">
@@ -67,18 +79,20 @@ const GraphCard: React.FC<GraphCardProps> = ({ title, data, filled }) => {
           </div>
         </div>
       </div>
-      <ResponsiveContainer width="70%" height={420}>
+      <div className=' md:w-[75%] w-full'>
+      <ResponsiveContainer width="100%" height={420}>
         <BarChart data={data} >
         <CartesianGrid strokeDasharray="3 0" vertical={false} />
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar radius={[8, 8, 8, 8]} dataKey="value1" fill={filled[0].colorCode} barSize={40} />
+          <Bar radius={[8, 8, 8, 8]} dataKey="value1" fill={filled[0].colorCode} barSize={barSize} />
           {data.some((d) => d.value2 !== undefined) && (
-            <Bar dataKey="value2" radius={[8, 8, 8, 8]} fill={filled[1]?.colorCode} barSize={40} />
+            <Bar dataKey="value2" radius={[8, 8, 8, 8]} fill={filled[1]?.colorCode} barSize={barSize} />
           )}
         </BarChart>
       </ResponsiveContainer>
+      </div>
     </div>
   );
 };

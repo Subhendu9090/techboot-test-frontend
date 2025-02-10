@@ -36,12 +36,12 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
     },
     {
       title: 'Trip Log',
-      icon: '/Sidebar/Triplog.svg',
+      icon: '/Sidebar/TripLog.svg',
       path: paths.tripLog,
     },
     {
       title: 'Profile',
-      icon: '/Sidebar/Profile.svg',
+      icon: '/Sidebar/ProfileActive.svg',
       activeIcon: '/Sidebar/ProfileActive.svg',
       path: paths.profile,
       subTitles: [
@@ -120,7 +120,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 z-30 w-[272px] h-[98vh] rounded-[16px] bg-[#527088] text-white
+          fixed top-0 left-0 z-30 w-[272px] h-[98vh] rounded-[16px] text-[#175AB6] bg-[#F8FAFF]
           flex flex-col
           transform transition-transform duration-300 ease-in-out
           ${isOpen ? '' : '-translate-x-full'}
@@ -136,15 +136,16 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
         </button>
 
         <div className="px-[16px] pt-[50px] pb-[16px] flex gap-2">
-          <img src="Sidebar/Frame.svg" alt="logo" />
+          <img src="Sidebar/Logo.svg" alt="logo" />
         </div>
 
         {/* Navigation Menu - Scrollable */}
         <nav className="flex-1 overflow-y-auto ">
           <ul className="space-y-2">
             {menuItems.map((item) => {
-              const isActive = location.pathname === item.path;
-
+              const isActive = location.pathname === item.path || 
+              (item.subTitles?.some(subItem => location.pathname === subItem.path) ?? false);
+              
               return (
                 <li key={item.path}>
                   <div>
@@ -178,7 +179,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
                         className={`
                           flex items-center gap-3 px-4 py-3
                           transition-colors duration-200
-                          ${isActive ? 'bg-[#0E1E2B]' : 'hover:bg-[#0E1E2B]/50'}
+                          ${isActive ? 'bg-[#DAE5FF]' : 'hover:bg-[#DAE5FF]/50'}
                         `}
                       >
                         <img
@@ -225,7 +226,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
         <div className="pb-2">
           <Link
             to={paths.profile}
-            className="flex items-center gap-3 px-4 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
+            className="flex items-center w-full gap-3 px-4 py-3 text-left  text-[#175AB6]  bg-[#F8FAFF] hover:bg-[#DAE5FF]/50 duration-200"
           >
             <img
               src="/Sidebar/Profiles.svg"
@@ -235,7 +236,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
             <span>Profile</span>
           </Link>
           <button
-            className="flex items-center px-4 gap-3 w-full py-3 text-left text-white hover:bg-[#0E1E2B]/50 transition-colors duration-200"
+            className="flex items-center w-full gap-3 px-4 py-3 text-left transition-colors duration-200 text-[#175AB6]  bg-[#F8FAFF] hover:bg-[#DAE5FF]/50'"
             onClick={() => logout()}
           >
             <img

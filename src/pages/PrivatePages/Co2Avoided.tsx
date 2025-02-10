@@ -3,20 +3,17 @@ import { GraphCard, HeaderSection } from '../../components'
 
 const Co2Avoided:React.FC =()=> {
   const sampleData = [
-    { name: 'Jan', value1: 30, value2: 20 },
-    { name: 'Feb', value1: 45, value2: 35 },
-    { name: 'Apr', value1: 60, value2: 40 },
-    { name: 'May', value1: 55, value2: 30 },
+    { name: 'Jan', value1: 30},
+    { name: 'Feb', value1: 45},
+    { name: 'Apr', value1: 60},
+    { name: 'May', value1: 55},
   ];
   const filledData =[
     {
-      name:"Creds Earned",
-      colorCode:"#273541"
+      name:"Mile Saved",
+      colorCode:"#70AE6E"
     },
-    {
-      name:"Creds Redeemed",
-      colorCode:"#92130B"
-    }
+   
   ]
   return (
     <div>
@@ -24,7 +21,7 @@ const Co2Avoided:React.FC =()=> {
         <HeaderSection/>
       </section>
       <section>
-        <GraphCard filled={filledData} data={sampleData} title="Total Creds - Yearly" />
+        <GraphCard filled={filledData} data={sampleData} title="CO2 Avoided" />
       </section>
     </div>
   )

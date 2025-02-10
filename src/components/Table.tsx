@@ -56,7 +56,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
                 return (
                   <th
                     key={index}
-                    className=" p-[16px] font-bold text-white bg-[#527088] text-start"
+                    className=" p-[16px] font-bold text-[#0E1E2B] bg-[#F8FAFF] text-start"
                     style={{
                       width: column.size ? `${column.size}px` : '100px',
                     }}
@@ -74,7 +74,7 @@ const Table: React.FC<TableProps> = ({ columns, data }) => {
                 return (
                   <th
                     key={index}
-                    className={`p-[16px] font-bold text-white bg-[#527088] text-start`}
+                    className={`p-[16px] font-bold text-[#0E1E2B] bg-[#F8FAFF] text-start`}
                     style={{
                       width: column.size ? `${column.size}px` : '100px',
                     }}
