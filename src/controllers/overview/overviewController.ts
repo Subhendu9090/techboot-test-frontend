@@ -21,6 +21,17 @@ const overViewCardData=(
   let url = `cards/?company=${companyName}&quarter=${quarter}&year=${year}`;
   // https://cc.qwegle.com/adminapi/cards/?company=QWEGLE&quarter=2&year=2024
   return HttpClient.apiCall(url, 'GET',token);
+};
+
+const overViewGraphData=(
+  companyName: string="QWEGLE",
+  quarter: number,
+  year: number,
+  token?:string
+)=>{
+  // https://cc.qwegle.com/adminapi/graph/?company=QWEGLE&quarter=2&year=2024
+  let url = `graph/?company=${companyName}&quarter=${quarter}&year=${year}`;
+  return HttpClient.apiCall(url, 'GET',token);
 }
 
-export { overViewTableData ,overViewCardData};
+export { overViewTableData ,overViewCardData,overViewGraphData};

@@ -90,11 +90,6 @@ const Table: React.FC<TableProps> = ({
             <tr>
               <td colSpan={columns.length} className="p-8 text-center">
                 <div className="flex flex-col items-center justify-center gap-4">
-                  <img
-                    src="/api/placeholder/64/64"
-                    alt="No data"
-                    className="w-16 h-16 opacity-50"
-                  />
                   <p className="text-lg font-medium text-gray-500">No Data Found</p>
                 </div>
               </td>

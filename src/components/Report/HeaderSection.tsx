@@ -1,6 +1,8 @@
 import React from 'react'
 import HeaderCard from './HeaderCard'
 import { Calendar } from 'lucide-react'
+import { Link } from 'react-router-dom';
+import { paths } from '../../routes/Path';
 
 const HeaderSection:React.FC=()=> {
   const cards = [
@@ -10,35 +12,40 @@ const HeaderSection:React.FC=()=> {
         '( Altogether Public Transit, Zero Emission & Ride Share Trips )',
       icon: '/Overview/No. of trips icon.svg',
       backgroundColor: '#EFF4FF',
-      textColor:"#0E1E2B"
+      textColor:"#0E1E2B",
+      navigateUrl :paths.trips
     },
     {
       title: 'Total  users',
       description: '(Altogether Active & Inactive Users)',
       icon: '/Overview/Total Users.svg',
       backgroundColor: '#E0F9DD',
-       textColor:"#0E1E2B"
+       textColor:"#0E1E2B",
+       navigateUrl :paths.totalUser
     },
     {
       title: 'Total creds ',
       description: '( Total Creds Earned &Redeemed ) ',
       icon: '/Report/Creds Earned.svg',
       backgroundColor: '#527088',
-       textColor:"#FFFFFF"
+       textColor:"#FFFFFF",
+       navigateUrl :paths.totalCreds
     },
     {
       title: 'Total CO2 avoided',
       description: '(Total Units of CO2 Avoided.) ',
       icon:'/Overview/Vector.svg',
       backgroundColor: '#70AE6E',
-       textColor:"#0E1E2B"
+       textColor:"#0E1E2B",
+       navigateUrl :paths.co2Avoided
     },
     {
       title: 'Total Miles Saved',
       description: '( Total Number of Miles Saved.)',
       icon:'/Overview/Miles Saved.svg',
       backgroundColor: '#EDD15A',
-       textColor:"#0E1E2B"
+      textColor:"#0E1E2B",
+      navigateUrl :paths.mileSaved
     },
   ];
   return (
@@ -62,7 +69,7 @@ const HeaderSection:React.FC=()=> {
 
       <section className="flex flex-wrap justify-center gap-4">
         {cards.map((card, index) => (
-          <div
+          <Link to={card.navigateUrl}
             key={index}
             className=" max-w-[220px] rounded-2xl shadow-[0px_4px_4px_rgba(0,0,0,0.25)] overflow-hidden"
             style={{
@@ -77,7 +84,7 @@ const HeaderSection:React.FC=()=> {
               icon={card.icon}
               textColor={card.textColor}
             />
-          </div>
+          </Link>
         ))}
       </section>
     </div>

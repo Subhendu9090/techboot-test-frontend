@@ -1,21 +1,17 @@
 import { useEffect, useState } from 'react';
 import { BarGraph, Card1, Table } from '../../components';
-import { Card1Props } from '../../components/Overview/Card1';
-import { formatDateToDDMMYYYY } from '../../utils/util';
+import { formatDateToDDMMYYYY, transformDataForOverViewGraph } from '../../utils/util';
 import { Calendar, Search, TrendingUp } from 'lucide-react';
 import { TableDetails } from '../../DialogBox';
-import { overViewCardData, overViewTableData } from '../../controllers/overview/overviewController';
-import { useAuth } from '../../contexts/Store';
-import cardData from '../../utils/ConstantValues/OverView/CardData';
+import useGetCardData from '../../hooks/overview/useGetCardData';
+import useGetTableData from '../../hooks/overview/useGetTableData';
+import { overViewGraphData } from '../../controllers/overview/overviewController';
 
 function Overview() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [tableData, setTableData] = useState([]);
-  const [totalItems, setTotalItems] = useState(0);
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-
+  
   const columns = [
     {
       header: 'Status',
@@ -86,124 +82,32 @@ function Overview() {
       ),
     },
   ];
-
   const date = new Date();
   const [search, setSearch] = useState<null | string>();
   const handelSearch = (e: any) => {
     setSearch(e.target.value);
   };
-  let { token } = useAuth();
-  
-  const fetchTableData = async () => {
-    setIsLoading(true);
-    try {
-      if (token === 'undefined' || token === null) {
-        token = '';
-      }
-      const response = await overViewTableData(
-        'QWEGLE',
-        currentPage,
-        rowsPerPage,
-        token
-      );
-      console.log('Table data Response', response);
-      if (response.success) {
-        setTotalItems(response?.data?.total_users);
-        setTableData(response?.data?.user_data);
-      }
-    } catch (error) {
-      console.log('Error in getting table data', error);
-      setTableData([]);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchTableData();
-  }, [currentPage, rowsPerPage]);
+  const { tableData, totalItems, isLoading } = useGetTableData(currentPage, rowsPerPage);
+  const{cardsData} = useGetCardData();
 
-  const [cardsData,setCardsData] = useState(cardData)
-
-  const fetchCardData = async () => {
+  const [graphData,setGraphData]=useState<any>()
+  const getGraphData=async()=>{
     try {
-      if (token === 'undefined' || token === null) {
-        token = '';
-      }
-  
-      const response = await overViewCardData('QWEGLE', 2, 2024, token);
-  
-      if (response.success) {
-        const apiData = response.data;
-        const updatedCardData: Card1Props[] = [
-          {
-            headerImageUrl: '/Overview/No. of trips icon.svg',
-            headerTitle: 'Trips',
-            value: apiData.current_period.data.total_trips.toString(),
-            footerImageUrl: '/Overview/Path 1008.png',
-            footerData: `${apiData.growth.total_trips}%`,
-            footerTitle: 'vs last quarter',
-            backgroundColor: '#EFF4FF',
-          },
-          {
-            headerImageUrl: '/Overview/Total Users.svg',
-            headerTitle: 'Users',
-            value: apiData.current_period.data.total_users.toString(),
-            footerImageUrl: '/Overview/Path 1008.png',
-            footerData: `${apiData.growth.total_users}%`,
-            footerTitle: 'vs last quarter',
-            backgroundColor: '#E0F9DD',
-          },
-          {
-            headerImageUrl: '/Overview/Total Creds Icon.svg',
-            headerTitle: 'Creds Earned',
-            value: apiData.current_period.data.total_creds_earned.toString(),
-            footerImageUrl: '/Overview/Path 1008.png',
-            footerData: `${apiData.growth.total_creds_earned}%`,
-            footerTitle: 'vs last quarter',
-            backgroundColor: 'rgb(132 154 173)',
-          },
-          {
-            headerImageUrl: '/Overview/Vector.svg',
-            headerTitle: 'CO2 Avoided',
-            value: apiData.current_period.data.co2_avoided.toString(),
-            footerImageUrl: '/Overview/Path 1008.png',
-            footerData: `${apiData.growth.co2_avoided}%`,
-            footerTitle: 'vs last quarter',
-            backgroundColor: '#E0F9DD',
-          },
-          {
-            headerImageUrl: '/Overview/points-and-dollars-exchange-svgrepo-com 2.svg',
-            headerTitle: 'Creds Redeemed',
-            value: apiData.current_period.data.total_creds_redeemed.toString(),
-            footerImageUrl: '/Overview/Path 1008.png',
-            footerData: `${apiData.growth.total_creds_redeemed}%`,
-            footerTitle: 'vs last quarter',
-            backgroundColor: 'rgb(129 172 231)',
-          },
-          {
-            headerImageUrl: '/Overview/Miles Saved.svg',
-            headerTitle: 'Miles Saved',
-            value: apiData.current_period.data.miles_saved.toString(),
-            footerImageUrl: '/Overview/Path 1008.png',
-            footerData: `${apiData.growth.miles_saved}%`,
-            footerTitle: 'vs last quarter',
-            backgroundColor: '#EDD15A',
-          },
-        ];
-        setCardsData(updatedCardData);
-      }
-  
-      console.log('Card data Response', response);
+      const Res = await overViewGraphData("QWEGLE",2,2024)
+      setGraphData(Res.data)
     } catch (error) {
-      console.log('Error in getting table data', error);
+      console.log(error);
     }
-  };
-  
+  }
   useEffect(()=>{
-    fetchCardData()
+    getGraphData();
   },[])
-console.log("Cards Data ",cardsData);
+  console.log(graphData?.monthly_breakdown);
 
+ const formattedData= transformDataForOverViewGraph(graphData?.monthly_breakdown)
+
+ console.log(formattedData);
+ 
   return (
     <div className="flex flex-col ">
       <section className="flex items-center justify-center w-full ">
@@ -265,7 +169,7 @@ console.log("Cards Data ",cardsData);
                   <span className="text-[16px] font-semibold text-[#0E1E2B]">
                     Trips Insights
                   </span>
-                  <div className="text-[#1A7DD3] font-semibold">160</div>
+                  <div className="text-[#1A7DD3] font-semibold">{graphData?.current_period?.data?.total_trips}</div>
                 </div>
               </div>
 
@@ -273,20 +177,20 @@ console.log("Cards Data ",cardsData);
                 <div className="pb-2 space-y-2">
                   <div className="flex items-center justify-center gap-1 text-sm font-semibold text-black">
                     <TrendingUp className=" text-[#2F5C28]" />
-                    <span className="text-[#2F5C28] font-semibold">+4%</span>
+                    <span className="text-[#2F5C28] font-semibold">+{graphData?.growth?.total_trips|| "0"}%</span>
                     <span>vs last Year</span>
                   </div>
                   <div className="flex justify-between gap-8 ">
                     <div>Public Transit</div>
-                    <div className=" text-[#165AB6] font-semibold">80</div>
+                    <div className=" text-[#165AB6] font-semibold">{graphData?.current_period?.data?.trip_types["Public Transit"] || "0"}</div>
                   </div>
                   <div className="flex justify-between gap-8 ">
                     <div>Zero Emission</div>
-                    <div className=" text-[#0E1E2B] font-semibold">20</div>
+                    <div className=" text-[#0E1E2B] font-semibold">{graphData?.current_period?.data?.trip_types["Zero Emission"] || "0"}</div>
                   </div>
                   <div className="flex justify-between gap-8 ">
                     <div>Ride Share</div>
-                    <div className=" text-[#2F5C28] font-semibold">60</div>
+                    <div className=" text-[#2F5C28] font-semibold">{graphData?.current_period?.data?.trip_types["Ride Share"] || "0"}</div>
                   </div>
                 </div>
               </div>
@@ -307,9 +211,8 @@ console.log("Cards Data ",cardsData);
                 </div>
               </div>
             </div>
-            {/* <div className="flex-grow"></div> */}
             <div>
-              <BarGraph />
+              <BarGraph data={formattedData} />
             </div>
           </div>
         </div>
@@ -356,5 +259,4 @@ console.log("Cards Data ",cardsData);
     </div>
   );
 }
-
 export default Overview;

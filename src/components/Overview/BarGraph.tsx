@@ -6,29 +6,17 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+interface BarGraphData {
+  name: string;
+  ZeroEmission: number;
+  PublicTransit: number;
+  RideShare: number;
+}
+interface BarGraphProps {
+  data: BarGraphData[];
+}
 
-const data = [
-  {
-    name: 'oct',
-    ZeroEmission: 2400,
-    PublicTransit: 2400,
-    RideShare: 4000,
-  },
-  {
-    name: 'Nov.',
-    ZeroEmission: 2400,
-    PublicTransit: 2400,
-    RideShare: 4000,
-  },
-  {
-    name: 'Dec.',
-    ZeroEmission: 2400,
-    PublicTransit: 2400,
-    RideShare: 4000,
-  }
-];
-
-const BarGraph = () => {
+const BarGraph:React.FC<BarGraphProps> = ({data}) => {
   return (
     <div className="w-full h-[250px] ">
       <ResponsiveContainer width="100%" height="100%">
