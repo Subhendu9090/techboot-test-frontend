@@ -1,17 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { BarGraph, Card1, Table } from '../../components';
-import { formatDateToDDMMYYYY, transformDataForOverViewGraph } from '../../utils/util';
+import {
+  formatDateToDDMMYYYY,
+  transformDataForOverViewGraph,
+} from '../../utils/util';
 import { Calendar, Search, TrendingUp } from 'lucide-react';
 import { TableDetails } from '../../DialogBox';
 import useGetCardData from '../../hooks/overview/useGetCardData';
 import useGetTableData from '../../hooks/overview/useGetTableData';
-import { overViewGraphData } from '../../controllers/overview/overviewController';
+import { useGetGraphData } from '../../hooks/overview/useGetGraphData';
 
 function Overview() {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [selectedRow, setSelectedRow] = useState<string | null>(null);
-  
+
   const columns = [
     {
       header: 'Status',
@@ -87,27 +90,16 @@ function Overview() {
   const handelSearch = (e: any) => {
     setSearch(e.target.value);
   };
-  const { tableData, totalItems, isLoading } = useGetTableData(currentPage, rowsPerPage);
-  const{cardsData} = useGetCardData();
+  const { tableData, totalItems, isLoading } = useGetTableData(
+    currentPage,
+    rowsPerPage
+  );
+  const { cardsData } = useGetCardData();
+  const { graphData } = useGetGraphData('QWEGLE', 3, 2024);
+  const formattedData = transformDataForOverViewGraph(
+    graphData?.monthly_breakdown
+  );
 
-  const [graphData,setGraphData]=useState<any>()
-  const getGraphData=async()=>{
-    try {
-      const Res = await overViewGraphData("QWEGLE",2,2024)
-      setGraphData(Res.data)
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  useEffect(()=>{
-    getGraphData();
-  },[])
-  console.log(graphData?.monthly_breakdown);
-
- const formattedData= transformDataForOverViewGraph(graphData?.monthly_breakdown)
-
- console.log(formattedData);
- 
   return (
     <div className="flex flex-col ">
       <section className="flex items-center justify-center w-full ">
@@ -169,7 +161,9 @@ function Overview() {
                   <span className="text-[16px] font-semibold text-[#0E1E2B]">
                     Trips Insights
                   </span>
-                  <div className="text-[#1A7DD3] font-semibold">{graphData?.current_period?.data?.total_trips}</div>
+                  <div className="text-[#1A7DD3] font-semibold">
+                    {graphData?.current_period?.data?.total_trips}
+                  </div>
                 </div>
               </div>
 
@@ -177,20 +171,34 @@ function Overview() {
                 <div className="pb-2 space-y-2">
                   <div className="flex items-center justify-center gap-1 text-sm font-semibold text-black">
                     <TrendingUp className=" text-[#2F5C28]" />
-                    <span className="text-[#2F5C28] font-semibold">+{graphData?.growth?.total_trips|| "0"}%</span>
+                    <span className="text-[#2F5C28] font-semibold">
+                      {graphData?.growth?.total_trips || '0'}%
+                    </span>
                     <span>vs last Year</span>
                   </div>
                   <div className="flex justify-between gap-8 ">
                     <div>Public Transit</div>
-                    <div className=" text-[#165AB6] font-semibold">{graphData?.current_period?.data?.trip_types["Public Transit"] || "0"}</div>
+                    <div className=" text-[#165AB6] font-semibold">
+                      {graphData?.current_period?.data?.trip_types[
+                        'Public Transit'
+                      ] || '0'}
+                    </div>
                   </div>
                   <div className="flex justify-between gap-8 ">
                     <div>Zero Emission</div>
-                    <div className=" text-[#0E1E2B] font-semibold">{graphData?.current_period?.data?.trip_types["Zero Emission"] || "0"}</div>
+                    <div className=" text-[#0E1E2B] font-semibold">
+                      {graphData?.current_period?.data?.trip_types[
+                        'Zero Emission'
+                      ] || '0'}
+                    </div>
                   </div>
                   <div className="flex justify-between gap-8 ">
                     <div>Ride Share</div>
-                    <div className=" text-[#2F5C28] font-semibold">{graphData?.current_period?.data?.trip_types["Ride Share"] || "0"}</div>
+                    <div className=" text-[#2F5C28] font-semibold">
+                      {graphData?.current_period?.data?.trip_types[
+                        'Ride Share'
+                      ] || '0'}
+                    </div>
                   </div>
                 </div>
               </div>
