@@ -95,7 +95,7 @@ function Overview() {
     rowsPerPage
   );
   const { cardsData } = useGetCardData();
-  const { graphData } = useGetGraphData('QWEGLE', 3, 2024);
+  const { graphData } = useGetGraphData('QWEGLE', 2, 2024);
   const formattedData = transformDataForOverViewGraph(
     graphData?.monthly_breakdown
   );
