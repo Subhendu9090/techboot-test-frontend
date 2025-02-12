@@ -61,13 +61,13 @@ function Overview() {
             alt="icon"
             onClick={() =>
               setSelectedRow(
-                selectedRow === row?.user_info?.username
+                selectedRow === row?.user_info?.email
                   ? null
-                  : row?.user_info?.username
+                  : row?.user_info?.email
               )
             }
           />
-          {selectedRow === row?.user_info?.username && (
+          {selectedRow === row?.user_info?.email && (
             <div className="absolute left-[-200px] z-50  top-10">
               <TableDetails
                 image={row?.image}
@@ -85,6 +85,7 @@ function Overview() {
       ),
     },
   ];
+
   const date = new Date();
   const [search, setSearch] = useState<null | string>();
   const handelSearch = (e: any) => {
@@ -99,6 +100,18 @@ function Overview() {
   const formattedData = transformDataForOverViewGraph(
     graphData?.monthly_breakdown
   );
+
+  const filteredTableData = tableData?.filter((row) => {
+    if (!search) return true;
+    console.log(row);
+
+    return (
+      row?.user_info?.username
+        ?.toLowerCase()
+        ?.includes(search?.toLowerCase()) ||
+      row?.user_info?.email?.toLowerCase().includes(search.toLowerCase())
+    );
+  });
 
   return (
     <div className="flex flex-col ">
@@ -255,7 +268,7 @@ function Overview() {
         </div>
         <Table
           columns={columns}
-          data={tableData}
+          data={filteredTableData}
           currentPage={currentPage}
           rowsPerPage={rowsPerPage}
           totalItems={totalItems}

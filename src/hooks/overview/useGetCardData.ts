@@ -80,8 +80,6 @@ function useGetCardData() {
           },
         ];
         setCardsData(updatedCardData);
-
-        console.log('Card data Response', response);
       } catch (error) {
         console.log('Error in getting table data', error);
       } finally {
