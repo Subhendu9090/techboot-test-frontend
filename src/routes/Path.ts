@@ -13,10 +13,12 @@ interface paths {
   mileSaved:string;
   totalUser:string;
   totalCreds:string;
+  register:string
 }
 
 export const paths: paths = {
   login: '/',
+  register:"/register",
   forgotPassword: '/forgot-password',
   overview: '/overview',
   twoStepVerification: '/two-step-verification',

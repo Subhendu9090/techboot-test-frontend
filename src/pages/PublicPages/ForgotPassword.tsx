@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
 import { CustomButton, CustomInput } from '../../components';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Mail, ArrowLeft } from 'lucide-react';
 import { paths } from '../../routes/Path';
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
-import { firebaseConfig } from '../../utils/FireBaseConfig';
-import { initializeApp } from 'firebase/app';
 import { useAuth } from '../../contexts/Store';
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-
 const ForgotPassword: React.FC = () => {
-  const navigate = useNavigate();
    const {userEmail,token,isAuthenticated} = useAuth()
   const [email, setEmail] = useState('');
   const [touched, setTouched] = useState(false);
@@ -31,19 +24,8 @@ console.log("Data from forgot password",userEmail,token,isAuthenticated);
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    if (email) {
-      try {
-        const res = await sendPasswordResetEmail(auth, email);
-        console.log(res);
-        setIsSubmitted(true);
-        setTimeout(() => navigate(paths.login), 5000);
-      } catch (error) {
-        console.error('Password reset error', error);
-      } finally {
-        setLoading(false);
-      }
-    }
+    setIsSubmitted(true)
+    
   };
 
   return (
@@ -117,13 +99,40 @@ console.log("Data from forgot password",userEmail,token,isAuthenticated);
         </div>
       </div>
 
-      <div className="relative w-full h-[300px] md:h-screen md:w-2/4">
-        <img
-          src="LoginPage/Bike.svg"
-          alt="Background"
-          className="object-cover w-full h-full"
-        />
-      </div>
+      {/* Right Side - Animated Background */}
+      <div className="relative w-full min-h-[300px] md:h-screen md:w-2/4 overflow-hidden">
+          {/* Main gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-indigo-500 to-purple-600">
+            {/* Large Blurred Circles */}
+            <div className="absolute rounded-full w-96 h-96 bg-gradient-to-r from-pink-100/40 to-purple-200/40 -top-20 -right-20 blur-3xl animate-pulse" />
+            <div className="absolute w-[30rem] h-[30rem] rounded-full bg-gradient-to-l from-rose-100/40 to-yellow-100/40 -bottom-20 -left-20 blur-3xl animate-pulse" />
+
+            {/* Center Piece */}
+            <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+              <div className="absolute rounded-full w-80 h-80 bg-gradient-to-br from-rose-100/30 to-yellow-200/30 blur-2xl animate-pulse" />
+            </div>
+
+            {/* Floating Elements */}
+            <div className="absolute w-20 h-20 top-1/4 left-1/4 bg-gradient-to-r from-blue-400/30 to-purple-400/30 backdrop-blur-sm rounded-xl animate-bounce" />
+            <div className="absolute w-16 h-16 delay-1000 rounded-full bottom-1/4 right-1/4 bg-rose-100/20 backdrop-blur-sm animate-bounce" />
+            <div className="absolute w-24 h-24 delay-700 rounded-lg top-3/4 left-1/3 bg-purple-100/20 backdrop-blur-sm animate-bounce" />
+
+            {/* Small dots with ping animation */}
+            <div className="absolute top-1/3 right-1/3">
+              <div className="w-3 h-3 rounded-full bg-rose-200/50 animate-ping" />
+            </div>
+            <div className="absolute bottom-1/3 left-1/4">
+              <div className="w-2 h-2 delay-1000 rounded-full bg-yellow-200/50 animate-ping" />
+            </div>
+            <div className="absolute top-2/3 right-1/4">
+              <div className="w-4 h-4 delay-700 rounded-full bg-purple-200/50 animate-ping" />
+            </div>
+
+            {/* Additional pulsing elements */}
+            <div className="absolute w-32 h-32 delay-1000 rounded-full top-1/4 right-1/3 bg-gradient-to-r from-rose-100/30 to-yellow-200/30 blur-xl animate-pulse" />
+            <div className="absolute w-40 h-40 delay-700 rounded-full bottom-1/3 left-1/3 bg-gradient-to-r from-pink-100/30 to-purple-100/30 blur-xl animate-pulse" />
+          </div>
+        </div>
     </div>
   );
 };

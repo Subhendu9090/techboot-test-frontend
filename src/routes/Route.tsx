@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { paths } from './Path';
 import { Login, ForgotPassword, Overview, TwoStepVerification, Dashboard, TripLog, Profile, IndividualUserInfo, Trips, Tags, PageNotFound, Co2Avoided, MileSaved, TotalCredsEarned, TotalUsers } from '../pages';
 import Layout from '../layout/Layout';
-import SecureRoutes from './SecureRoutes';
+import Register from '../pages/PublicPages/Register';
 
 const ProtectedLayout = () => {
   return (
@@ -30,14 +30,15 @@ const RoutePage: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path={paths.login} element={<Login />} />
+        <Route path={paths.register} element={<Register />} />
         <Route path={paths.forgotPassword} element={<ForgotPassword />} />
         <Route
           path={paths.twoStepVerification}
           element={<TwoStepVerification />}
         />
-        <Route element={<SecureRoutes/>}>
+        {/* <Route element={<SecureRoutes/>}> */}
           <Route path="/*" element={<ProtectedLayout />} />
-        </Route>
+        {/* </Route> */}
       </Routes>
     </BrowserRouter>
   );

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { X, ChevronDown, ChevronRight } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { paths } from '../routes/Path';
-import { useAuth } from '../contexts/Store';
 
 interface SubMenuItem {
   title: string;
@@ -25,7 +24,6 @@ interface SideBarProps {
 
 const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
-  const { logout } = useAuth();
   const [openMenus, setOpenMenus] = useState<{ [key: string]: boolean }>({});
 
   const menuItems: MenuItem[] = [
@@ -108,7 +106,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
       [title]: !prev[title],
     }));
   };
-
+const navigate = useNavigate()
   return (
     <div className="m-[1vh] relative">
       {/* Overlay for mobile */}
@@ -237,7 +235,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
           </Link>
           <button
             className="flex items-center w-full gap-3 px-4 py-3 text-left transition-colors duration-200 text-[#175AB6]  bg-[#F8FAFF] hover:bg-[#DAE5FF]/50'"
-            onClick={() => logout()}
+            onClick={()=> navigate(paths.login)}
           >
             <img
               src="/Sidebar/Log Out.svg"
