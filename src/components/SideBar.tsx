@@ -136,7 +136,7 @@ const SideBar: React.FC<SideBarProps> = ({ isOpen, onClose }) => {
         </button>
 
         <div className="px-[16px] pt-[50px] pb-[16px] flex gap-2">
-          <img src="Sidebar/Logo.svg" alt="logo" />
+         <div className='w-full text-center '>MSME</div>
         </div>
 
         {/* Navigation Menu - Scrollable */}
