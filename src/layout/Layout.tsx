@@ -1,5 +1,4 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 
 interface LayoutProps {
@@ -7,14 +6,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const location = useLocation();
-
-  const isAuthPage = ['/login', '/register'].includes(location.pathname);
-
-  if (isAuthPage) {
-    return <>{children}</>;
-  }
-
+ 
   return (
     <div className="flex min-h-screen bg-gray-50">
       <div className="fixed top-0 left-0 h-full min-h-screen">
