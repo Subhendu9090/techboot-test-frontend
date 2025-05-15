@@ -44,8 +44,6 @@
 
 /* Apply Fonts */
 body {
-  font-family: var(--font-secondary);
-  /* margin: 10px; */
   background-color: white;
 }
 
