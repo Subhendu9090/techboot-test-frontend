@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Home,
   Inbox,
@@ -10,10 +10,10 @@ import {
   DollarSign,
   ChevronLeft,
   Menu,
-} from 'lucide-react';
-import { useLocation, useNavigate } from 'react-router-dom';
+} from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
-const Sidebar:React.FC = () => {
+const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -21,14 +21,14 @@ const Sidebar:React.FC = () => {
   const activePage = location.pathname;
 
   const menuItems = [
-    { id: '', name: 'Dashboard', icon: Home },
-    { id: 'inbox', name: 'Inbox', icon: Inbox },
-    { id: 'leads', name: 'Lead objects', icon: FileText },
-    { id: 'trades', name: 'Trades', icon: Users, badge: 8 },
-    { id: 'postal', name: 'Postal codes', icon: MapPin },
-    { id: 'support', name: 'Support', icon: HelpCircle },
-    { id: 'quality', name: 'Quality', icon: BarChart2 },
-    { id: 'finance', name: 'Finance', icon: DollarSign },
+    { id: "", name: "Dashboard", icon: Home },
+    { id: "inbox", name: "Inbox", icon: Inbox },
+    { id: "leads", name: "Lead objects", icon: FileText },
+    { id: "trades", name: "Trades", icon: Users, badge: 8 },
+    { id: "postal", name: "Postal codes", icon: MapPin },
+    { id: "support", name: "Support", icon: HelpCircle },
+    { id: "quality", name: "Quality", icon: BarChart2 },
+    { id: "finance", name: "Finance", icon: DollarSign },
   ];
 
   const handleNavigate = (id: string) => {
@@ -50,7 +50,7 @@ const Sidebar:React.FC = () => {
       {/* Sidebar */}
       <aside
         className={`fixed z-40 top-0 left-0 w-[272px] h-full bg-teal-900 text-white transform transition-transform duration-300 ease-in-out
-        ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} 
         md:relative md:translate-x-0 md:flex md:flex-col`}
       >
         <div className="flex items-center justify-between p-4 md:justify-start">
@@ -73,7 +73,7 @@ const Sidebar:React.FC = () => {
                 key={item.id}
                 onClick={() => handleNavigate(item.id)}
                 className={`px-4 py-2 flex items-center cursor-pointer hover:bg-teal-800 transition ${
-                  isActive ? 'bg-teal-800 border-l-4 border-teal-300' : ''
+                  isActive ? "bg-teal-800 border-l-4 border-teal-300" : ""
                 }`}
               >
                 <item.icon size={18} className="mr-3" />
