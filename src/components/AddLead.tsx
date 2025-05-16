@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import { API_BASE_URL } from '../util';
+import React, { useState } from "react";
+import axios from "axios";
+import { API_BASE_URL } from "../util";
 
 type Lead = {
   name: string;
   email: string;
   phone: string;
-  status: 'New' | 'Contacted' | 'Qualified' | 'Lost' | '';
+  status: "New" | "Contacted" | "Qualified" | "Lost" | "";
 };
 
 type Props = {
@@ -16,10 +16,10 @@ type Props = {
 
 const CreateLeadDialog: React.FC<Props> = ({ isOpen, onClose }) => {
   const [lead, setLead] = useState<Lead>({
-    name: '',
-    email: '',
-    phone: '',
-    status: '',
+    name: "",
+    email: "",
+    phone: "",
+    status: "",
   });
 
   const [saving, setSaving] = useState(false);
@@ -35,20 +35,26 @@ const CreateLeadDialog: React.FC<Props> = ({ isOpen, onClose }) => {
 
   const handleSave = async () => {
     if (!lead.name || !lead.email || !lead.phone || !lead.status) {
-      alert('Please fill all fields');
+      alert("Please fill all fields");
       return;
     }
 
     try {
       setSaving(true);
       const res = await axios.post(`${API_BASE_URL}lead`, lead);
-      console.log(res);
-      
+      if (res) {
+        setLead({
+          name: "",
+          email: "",
+          phone: "",
+          status: "",
+        });
+      }
       setSaving(false);
       onClose();
     } catch (error) {
       setSaving(false);
-      alert('Failed to create lead');
+      alert("Failed to create lead");
     }
   };
 
@@ -74,7 +80,7 @@ const CreateLeadDialog: React.FC<Props> = ({ isOpen, onClose }) => {
           placeholder="Email"
         />
         <input
-          type="tel"
+          type="number"
           name="phone"
           value={lead.phone}
           onChange={handleChange}
@@ -107,7 +113,7 @@ const CreateLeadDialog: React.FC<Props> = ({ isOpen, onClose }) => {
             disabled={saving}
             className="px-4 py-2 text-white bg-teal-800 rounded hover:bg-teal-700"
           >
-            {saving ? 'Saving...' : 'Save'}
+            {saving ? "Saving..." : "Save"}
           </button>
         </div>
       </div>
